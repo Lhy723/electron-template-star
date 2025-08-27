@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* 自定义工具类 */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-black/10 backdrop-blur-md border border-white/10;
+  }
+}
+
+/* Element Plus 主题变量覆盖 */
+:root {
+  --el-color-primary: theme('colors.blue.500');
+  --el-color-primary-light-3: theme('colors.blue.300');
+  --el-color-primary-light-5: theme('colors.blue.200');
+  --el-color-primary-light-7: theme('colors.blue.100');
+  --el-color-primary-light-8: theme('colors.blue.50');
+  --el-color-primary-light-9: theme('colors.blue.25');
+  --el-color-primary-dark-2: theme('colors.blue.700');
+  --el-border-radius-base: theme('borderRadius.md');
+  --el-border-radius-small: theme('borderRadius.sm');
+}
+
+.dark {
+  --el-bg-color: theme('colors.gray.900');
+  --el-bg-color-page: theme('colors.gray.950');
+  --el-bg-color-overlay: theme('colors.gray.800');
+  --el-text-color-primary: theme('colors.gray.100');
+  --el-text-color-regular: theme('colors.gray.300');
+  --el-text-color-secondary: theme('colors.gray.400');
+  --el-text-color-placeholder: theme('colors.gray.500');
+  --el-border-color: theme('colors.gray.700');
+  --el-border-color-light: theme('colors.gray.600');
+  --el-border-color-lighter: theme('colors.gray.500');
+  --el-border-color-extra-light: theme('colors.gray.400');
+  --el-fill-color: theme('colors.gray.800');
+  --el-fill-color-light: theme('colors.gray.700');
+  --el-fill-color-lighter: theme('colors.gray.600');
+  --el-fill-color-extra-light: theme('colors.gray.500');
+  --el-fill-color-blank: transparent;
+}
+
+/* 响应式设计辅助类 */
+@layer utilities {
+  .container-responsive {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4;
+  }
+  
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+  
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  }
+}
