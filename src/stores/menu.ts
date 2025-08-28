@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { RouteRecordRaw } from 'vue-router'
-import { constantRoutes, asyncRoutes } from '@/router'
+import { constantRoutes } from '@/router'
 
 export interface MenuItem {
   id: string
@@ -48,24 +48,13 @@ export const useMenuStore = defineStore('menu', () => {
   })
 
   // 方法
-  const generateRoutes = async (roles: string[]): Promise<RouteRecordRaw[]> => {
-    let accessedRoutes: RouteRecordRaw[]
-    
-    if (roles.includes('admin')) {
-      // 管理员拥有所有权限
-      accessedRoutes = asyncRoutes
-    } else {
-      // 根据角色过滤路由
-      accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-    }
-    
-    addRoutes.value = accessedRoutes
-    routes.value = constantRoutes.concat(accessedRoutes)
+  const generateRoutes = async (): Promise<RouteRecordRaw[]> => {
+    routes.value = constantRoutes
     
     // 生成菜单列表
     menuList.value = generateMenus(routes.value)
     
-    return accessedRoutes
+    return []
   }
 
   const generateMenus = (routes: RouteRecordRaw[]): MenuItem[] => {
@@ -97,29 +86,7 @@ export const useMenuStore = defineStore('menu', () => {
     return menus
   }
 
-  const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]): RouteRecordRaw[] => {
-    const res: RouteRecordRaw[] = []
-    
-    routes.forEach(route => {
-      const tmp = { ...route }
-      
-      if (hasPermission(roles, tmp)) {
-        if (tmp.children) {
-          tmp.children = filterAsyncRoutes(tmp.children, roles)
-        }
-        res.push(tmp)
-      }
-    })
-    
-    return res
-  }
 
-  const hasPermission = (roles: string[], route: RouteRecordRaw): boolean => {
-    if (route.meta?.roles) {
-      return roles.some(role => route.meta!.roles!.includes(role))
-    }
-    return true
-  }
 
   const filterMenus = (menus: MenuItem[]): MenuItem[] => {
     return menus.filter(menu => {

@@ -141,12 +141,20 @@ export const useUserStore = defineStore('user', () => {
     return permissionList.some(permission => permissions.value.includes(permission))
   }
 
+  // 计算属性
+  const isLoggedIn = computed(() => {
+    return !!token.value && !!userInfo.value
+  })
+
   return {
     // 状态
     token,
     userInfo,
     roles,
     permissions,
+    
+    // 计算属性
+    isLoggedIn,
     
     // 方法
     initUserStore,
