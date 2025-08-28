@@ -1,19 +1,26 @@
 <template>
-  <div id="app" class="h-screen overflow-hidden">
+  <div 
+    id="app" 
+    class="h-screen overflow-hidden"
+    :class="[
+      themeStore.isDark ? 'dark' : '',
+      `theme-${themeStore.config.color}`,
+      {
+        'compact': themeStore.config.compact,
+        'fixed-header': themeStore.config.fixedHeader,
+        'fixed-sidebar': themeStore.config.fixedSidebar,
+        'sidebar-collapsed': themeStore.config.sidebarCollapsed
+      }
+    ]"
+  >
     <router-view />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { useThemeStore } from '@/stores/theme'
 
 const themeStore = useThemeStore()
-
-onMounted(() => {
-  // 初始化主题
-  themeStore.initTheme()
-})
 </script>
 
 <style>

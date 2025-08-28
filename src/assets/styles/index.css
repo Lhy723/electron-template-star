@@ -89,7 +89,7 @@
   --el-color-primary-light-5: theme('colors.blue.200');
   --el-color-primary-light-7: theme('colors.blue.100');
   --el-color-primary-light-8: theme('colors.blue.50');
-  --el-color-primary-light-9: theme('colors.blue.25');
+  --el-color-primary-light-9: theme('colors.blue.50');
   --el-color-primary-dark-2: theme('colors.blue.700');
   --el-border-radius-base: theme('borderRadius.md');
   --el-border-radius-small: theme('borderRadius.sm');
