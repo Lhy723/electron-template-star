@@ -1,0 +1,268 @@
+/* 主题CSS变量定义 */
+:root {
+  /* 基础颜色 */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  
+  /* 主色调 */
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  
+  /* 次要色 */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  
+  /* 静音色 */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  
+  /* 强调色 */
+  --accent: 210 40% 96%;
+  --accent-foreground: 222.2 84% 4.9%;
+  
+  /* 破坏性颜色 */
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  
+  /* 边框 */
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  
+  /* 圆角 */
+  --radius: 0.5rem;
+}
+
+/* 深色主题 */
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 84% 4.9%;
+  
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 94.1%;
+}
+
+/* 蓝色主题 */
+.theme-blue {
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --ring: 221.2 83.2% 53.3%;
+}
+
+/* 绿色主题 */
+.theme-green {
+  --primary: 142.1 76.2% 36.3%;
+  --primary-foreground: 355.7 100% 97.3%;
+  --ring: 142.1 76.2% 36.3%;
+}
+
+/* 紫色主题 */
+.theme-purple {
+  --primary: 262.1 83.3% 57.8%;
+  --primary-foreground: 210 40% 98%;
+  --ring: 262.1 83.3% 57.8%;
+}
+
+/* 橙色主题 */
+.theme-orange {
+  --primary: 24.6 95% 53.1%;
+  --primary-foreground: 60 9.1% 97.8%;
+  --ring: 24.6 95% 53.1%;
+}
+
+/* 红色主题 */
+.theme-red {
+  --primary: 0 84.2% 60.2%;
+  --primary-foreground: 210 40% 98%;
+  --ring: 0 84.2% 60.2%;
+}
+
+/* 基础样式 */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 过渡动画 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.slide-enter-from {
+  transform: translateX(-100%);
+}
+
+.slide-leave-to {
+  transform: translateX(100%);
+}
+
+.zoom-enter-active,
+.zoom-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.zoom-enter-from,
+.zoom-leave-to {
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+/* 紧凑模式 */
+.compact {
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.25rem;
+}
+
+.compact .el-button {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.compact .el-input__inner {
+  height: 28px;
+  line-height: 28px;
+}
+
+.compact .el-card {
+  margin-bottom: 12px;
+}
+
+.compact .el-card__header {
+  padding: 12px 16px;
+}
+
+.compact .el-card__body {
+  padding: 12px 16px;
+}
+
+/* 固定头部 */
+.fixed-header .app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.fixed-header .app-main {
+  padding-top: 60px;
+}
+
+/* 固定侧边栏 */
+.fixed-sidebar .app-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.fixed-sidebar .app-main {
+  margin-left: 200px;
+}
+
+.fixed-sidebar.sidebar-collapsed .app-main {
+  margin-left: 64px;
+}
+
+/* 侧边栏折叠 */
+.sidebar-collapsed .app-sidebar {
+  width: 64px;
+}
+
+.sidebar-collapsed .sidebar-menu .el-menu-item span,
+.sidebar-collapsed .sidebar-menu .el-submenu__title span {
+  display: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .fixed-sidebar .app-main {
+    margin-left: 0;
+  }
+  
+  .app-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar-open .app-sidebar {
+    transform: translateX(0);
+  }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* 深色模式下的滚动条 */
+.dark ::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.6);
+}
