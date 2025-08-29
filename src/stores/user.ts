@@ -35,11 +35,11 @@ export const useUserStore = defineStore('user', () => {
     // 从本地存储恢复token和用户信息
     const savedToken = localStorage.getItem(TOKEN_KEY)
     const savedUserInfo = localStorage.getItem(USER_INFO_KEY)
-    
+
     if (savedToken) {
       token.value = savedToken
     }
-    
+
     if (savedUserInfo) {
       try {
         const parsed = JSON.parse(savedUserInfo)
@@ -57,14 +57,14 @@ export const useUserStore = defineStore('user', () => {
     try {
       // 模拟登录API调用
       const response = await mockLogin(loginForm)
-      
+
       if (response.success) {
         token.value = response.data.token
         localStorage.setItem(TOKEN_KEY, token.value)
-        
+
         // 获取用户信息
         await getUserInfo()
-        
+
         return true
       } else {
         throw new Error(response.message || '登录失败')
@@ -79,14 +79,14 @@ export const useUserStore = defineStore('user', () => {
     try {
       // 模拟获取用户信息API调用
       const response = await mockGetUserInfo(token.value)
-      
+
       if (response.success) {
         userInfo.value = response.data
         roles.value = response.data.roles
         permissions.value = response.data.permissions
-        
+
         localStorage.setItem(USER_INFO_KEY, JSON.stringify(userInfo.value))
-        
+
         return userInfo.value
       } else {
         throw new Error(response.message || '获取用户信息失败')
@@ -152,10 +152,10 @@ export const useUserStore = defineStore('user', () => {
     userInfo,
     roles,
     permissions,
-    
+
     // 计算属性
     isLoggedIn,
-    
+
     // 方法
     initUserStore,
     login,
@@ -166,7 +166,7 @@ export const useUserStore = defineStore('user', () => {
     hasRole,
     hasPermission,
     hasAnyRole,
-    hasAnyPermission
+    hasAnyPermission,
   }
 })
 
@@ -180,27 +180,27 @@ interface ApiResponse<T = any> {
 const mockLogin = async (loginForm: LoginForm): Promise<ApiResponse<{ token: string }>> => {
   // 模拟网络延迟
   await new Promise(resolve => setTimeout(resolve, 1000))
-  
+
   // 简单的用户名密码验证
   if (loginForm.username === 'admin' && loginForm.password === 'admin123') {
     return {
       success: true,
       data: {
-        token: 'mock-admin-token-' + Date.now()
-      }
+        token: 'mock-admin-token-' + Date.now(),
+      },
     }
   } else if (loginForm.username === 'user' && loginForm.password === 'user123') {
     return {
       success: true,
       data: {
-        token: 'mock-user-token-' + Date.now()
-      }
+        token: 'mock-user-token-' + Date.now(),
+      },
     }
   } else {
     return {
       success: false,
       data: { token: '' },
-      message: '用户名或密码错误'
+      message: '用户名或密码错误',
     }
   }
 }
@@ -208,7 +208,7 @@ const mockLogin = async (loginForm: LoginForm): Promise<ApiResponse<{ token: str
 const mockGetUserInfo = async (token: string): Promise<ApiResponse<UserInfo>> => {
   // 模拟网络延迟
   await new Promise(resolve => setTimeout(resolve, 500))
-  
+
   if (token.includes('admin')) {
     return {
       success: true,
@@ -219,10 +219,17 @@ const mockGetUserInfo = async (token: string): Promise<ApiResponse<UserInfo>> =>
         email: 'admin@example.com',
         avatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
         roles: ['admin', 'user'],
-        permissions: ['user:read', 'user:write', 'user:delete', 'role:read', 'role:write', 'role:delete'],
+        permissions: [
+          'user:read',
+          'user:write',
+          'user:delete',
+          'role:read',
+          'role:write',
+          'role:delete',
+        ],
         lastLoginTime: new Date().toISOString(),
-        createTime: '2023-01-01T00:00:00.000Z'
-      }
+        createTime: '2023-01-01T00:00:00.000Z',
+      },
     }
   } else if (token.includes('user')) {
     return {
@@ -236,14 +243,14 @@ const mockGetUserInfo = async (token: string): Promise<ApiResponse<UserInfo>> =>
         roles: ['user'],
         permissions: ['user:read'],
         lastLoginTime: new Date().toISOString(),
-        createTime: '2023-01-01T00:00:00.000Z'
-      }
+        createTime: '2023-01-01T00:00:00.000Z',
+      },
     }
   } else {
     return {
       success: false,
       data: {} as UserInfo,
-      message: 'Token无效'
+      message: 'Token无效',
     }
   }
 }
@@ -251,10 +258,10 @@ const mockGetUserInfo = async (token: string): Promise<ApiResponse<UserInfo>> =>
 const mockLogout = async (_token: string): Promise<void> => {
   // 模拟网络延迟
   await new Promise(resolve => setTimeout(resolve, 300))
-  
+
   return {
     success: true,
     data: null,
-    message: '登出成功'
+    message: '登出成功',
   }
 }

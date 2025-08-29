@@ -1,11 +1,11 @@
 <template>
   <div class="app-layout">
     <!-- 侧边栏 -->
-    <aside 
+    <aside
       class="app-sidebar"
       :class="{
-        'collapsed': themeStore.config.sidebarCollapsed,
-        'fixed': themeStore.config.fixedSidebar
+        collapsed: themeStore.config.sidebarCollapsed,
+        fixed: themeStore.config.fixedSidebar,
       }"
     >
       <div class="sidebar-header">
@@ -15,7 +15,7 @@
           <el-icon v-else size="20"><Grid /></el-icon>
         </div>
       </div>
-      
+
       <nav class="sidebar-nav">
         <el-menu
           :default-active="$route.path"
@@ -28,12 +28,12 @@
             <el-icon><Odometer /></el-icon>
             <template #title>仪表盘</template>
           </el-menu-item>
-          
+
           <el-menu-item index="/components">
             <el-icon><Grid /></el-icon>
             <template #title>组件示例</template>
           </el-menu-item>
-          
+
           <el-menu-item index="/theme">
             <el-icon><Brush /></el-icon>
             <template #title>主题设置</template>
@@ -45,30 +45,28 @@
     <!-- 主内容区 -->
     <div class="app-main">
       <!-- 头部 -->
-      <header 
+      <header
         class="app-header"
         :class="{
-          'fixed': themeStore.config.fixedHeader
+          fixed: themeStore.config.fixedHeader,
         }"
       >
         <div class="header-left">
-          <el-button 
-            circle 
-            :icon="Menu" 
-            @click="themeStore.toggleSidebar"
-          />
-          
+          <el-button circle :icon="Menu" @click="themeStore.toggleSidebar" />
+
           <!-- 面包屑 -->
           <el-breadcrumb v-if="themeStore.config.showBreadcrumb" class="breadcrumb">
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-            <el-breadcrumb-item v-if="$route.meta.title">{{ $route.meta.title }}</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="$route.meta.title">{{
+              $route.meta.title
+            }}</el-breadcrumb-item>
           </el-breadcrumb>
         </div>
-        
+
         <div class="header-right">
           <!-- 主题切换 -->
           <ThemeToggle />
-          
+
           <!-- 用户信息 -->
           <el-dropdown trigger="click">
             <el-avatar :size="32" :src="userStore.avatar" />
@@ -84,26 +82,21 @@
 
       <!-- 标签页 -->
       <div v-if="themeStore.config.showTabs" class="app-tabs">
-        <el-tabs 
-          v-model="activeTab" 
-          type="card" 
-          closable 
+        <el-tabs
+          v-model="activeTab"
+          type="card"
+          closable
           @tab-remove="removeTab"
           @tab-click="handleTabClick"
         >
-          <el-tab-pane
-            v-for="tab in tabs"
-            :key="tab.path"
-            :label="tab.title"
-            :name="tab.path"
-          />
+          <el-tab-pane v-for="tab in tabs" :key="tab.path" :label="tab.title" :name="tab.path" />
         </el-tabs>
       </div>
 
       <!-- 页面内容 -->
       <main class="app-content">
         <router-view v-slot="{ Component }">
-          <transition 
+          <transition
             :name="themeStore.config.enableTransition ? themeStore.config.transitionName : 'none'"
             mode="out-in"
           >
@@ -126,12 +119,7 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import {
-  Menu,
-  Grid,
-  Odometer,
-  Brush
-} from '@element-plus/icons-vue'
+import { Menu, Grid, Odometer, Brush } from '@element-plus/icons-vue'
 import { useThemeStore } from '@/stores/theme'
 import { useUserStore } from '@/stores/user'
 import ThemeToggle from '@/components/theme-toggle.vue'
@@ -143,22 +131,20 @@ const userStore = useUserStore()
 
 // 标签页管理
 const activeTab = ref(route.path)
-const tabs = ref([
-  { path: '/dashboard', title: '仪表盘' }
-])
+const tabs = ref([{ path: '/dashboard', title: '仪表盘' }])
 
 // 监听路由变化，添加标签页
 watch(
   () => route.path,
-  (newPath) => {
+  newPath => {
     activeTab.value = newPath
-    
+
     // 添加新标签页
     const existingTab = tabs.value.find(tab => tab.path === newPath)
     if (!existingTab && route.meta.title) {
       tabs.value.push({
         path: newPath,
-        title: route.meta.title as string
+        title: route.meta.title as string,
       })
     }
   },
@@ -169,9 +155,9 @@ watch(
 const removeTab = (targetName: string) => {
   const targetIndex = tabs.value.findIndex(tab => tab.path === targetName)
   if (targetIndex === -1) return
-  
+
   tabs.value.splice(targetIndex, 1)
-  
+
   // 如果关闭的是当前标签页，跳转到其他标签页
   if (targetName === activeTab.value) {
     const nextTab = tabs.value[targetIndex] || tabs.value[targetIndex - 1]
@@ -363,15 +349,15 @@ const handleLogout = () => {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
-  
+
   .sidebar-open .app-sidebar {
     transform: translateX(0);
   }
-  
+
   .app-main {
     margin-left: 0 !important;
   }
-  
+
   .breadcrumb {
     display: none;
   }

@@ -7,7 +7,8 @@ export const isString = (val: unknown): val is string => typeof val === 'string'
 export const isNumber = (val: unknown): val is number => typeof val === 'number'
 export const isBoolean = (val: unknown): val is boolean => typeof val === 'boolean'
 export const isFunction = (val: unknown): val is Function => typeof val === 'function'
-export const isObject = (val: unknown): val is Record<any, any> => val !== null && typeof val === 'object'
+export const isObject = (val: unknown): val is Record<any, any> =>
+  val !== null && typeof val === 'object'
 export const isArray = Array.isArray
 export const isDate = (val: unknown): val is Date => val instanceof Date
 export const isRegExp = (val: unknown): val is RegExp => val instanceof RegExp
@@ -49,7 +50,7 @@ export const deepMerge = <T extends Record<string, any>>(
 ): T => {
   if (!sources.length) return target
   const source = sources.shift()
-  
+
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
       if (isObject(source[key])) {
@@ -60,7 +61,7 @@ export const deepMerge = <T extends Record<string, any>>(
       }
     }
   }
-  
+
   return deepMerge(target, ...sources)
 }
 
@@ -71,18 +72,18 @@ export const debounce = <T extends (...args: any[]) => any>(
   immediate = false
 ): ((...args: Parameters<T>) => void) => {
   let timeout: NodeJS.Timeout | null = null
-  
+
   return function executedFunction(...args: Parameters<T>) {
     const later = () => {
       timeout = null
       if (!immediate) func(...args)
     }
-    
+
     const callNow = immediate && !timeout
-    
+
     if (timeout) clearTimeout(timeout)
     timeout = setTimeout(later, wait)
-    
+
     if (callNow) func(...args)
   }
 }
@@ -93,7 +94,7 @@ export const throttle = <T extends (...args: any[]) => any>(
   limit: number
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean
-  
+
   return function executedFunction(...args: Parameters<T>) {
     if (!inThrottle) {
       func(...args)
@@ -106,11 +107,11 @@ export const throttle = <T extends (...args: any[]) => any>(
 // 格式化文件大小
 export const formatFileSize = (bytes: number): string => {
   if (bytes === 0) return '0 Bytes'
-  
+
   const k = 1024
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
-  
+
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
 }
 
@@ -140,7 +141,7 @@ export const randomString = (length = 8): string => {
 
 // 生成UUID
 export const generateUUID = (): string => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     const r = (Math.random() * 16) | 0
     const v = c === 'x' ? r : (r & 0x3) | 0x8
     return v.toString(16)
@@ -152,33 +153,33 @@ export const getUrlParams = (url?: string): Record<string, string> => {
   const urlStr = url || window.location.href
   const params: Record<string, string> = {}
   const urlObj = new URL(urlStr)
-  
+
   urlObj.searchParams.forEach((value, key) => {
     params[key] = value
   })
-  
+
   return params
 }
 
 // 设置URL参数
 export const setUrlParams = (params: Record<string, string | number>): string => {
   const url = new URL(window.location.href)
-  
+
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, String(value))
   })
-  
+
   return url.toString()
 }
 
 // 移除URL参数
 export const removeUrlParams = (keys: string[]): string => {
   const url = new URL(window.location.href)
-  
+
   keys.forEach(key => {
     url.searchParams.delete(key)
   })
-  
+
   return url.toString()
 }
 
@@ -237,7 +238,7 @@ export const getDeviceInfo = () => {
   const isMobile = /mobile/i.test(ua) || isAndroid || isIOS
   const isTablet = /tablet|ipad/i.test(ua)
   const isDesktop = !isMobile && !isTablet
-  
+
   return {
     userAgent: ua,
     platform: navigator.platform,
@@ -259,12 +260,12 @@ export const getDeviceInfo = () => {
       availWidth: screen.availWidth,
       availHeight: screen.availHeight,
       colorDepth: screen.colorDepth,
-      pixelDepth: screen.pixelDepth
+      pixelDepth: screen.pixelDepth,
     },
     viewport: {
       width: window.innerWidth,
-      height: window.innerHeight
-    }
+      height: window.innerHeight,
+    },
   }
 }
 
@@ -279,7 +280,7 @@ export const storage = {
       return defaultValue || null
     }
   },
-  
+
   set: (key: string, value: any): boolean => {
     try {
       localStorage.setItem(key, JSON.stringify(value))
@@ -289,7 +290,7 @@ export const storage = {
       return false
     }
   },
-  
+
   remove: (key: string): boolean => {
     try {
       localStorage.removeItem(key)
@@ -299,7 +300,7 @@ export const storage = {
       return false
     }
   },
-  
+
   clear: (): boolean => {
     try {
       localStorage.clear()
@@ -308,7 +309,7 @@ export const storage = {
       console.error('清空存储数据失败:', error)
       return false
     }
-  }
+  },
 }
 
 // 会话存储
@@ -322,7 +323,7 @@ export const sessionStorage = {
       return defaultValue || null
     }
   },
-  
+
   set: (key: string, value: any): boolean => {
     try {
       window.sessionStorage.setItem(key, JSON.stringify(value))
@@ -332,7 +333,7 @@ export const sessionStorage = {
       return false
     }
   },
-  
+
   remove: (key: string): boolean => {
     try {
       window.sessionStorage.removeItem(key)
@@ -342,7 +343,7 @@ export const sessionStorage = {
       return false
     }
   },
-  
+
   clear: (): boolean => {
     try {
       window.sessionStorage.clear()
@@ -351,5 +352,5 @@ export const sessionStorage = {
       console.error('清空会话存储数据失败:', error)
       return false
     }
-  }
+  },
 }

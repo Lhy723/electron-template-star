@@ -16,21 +16,22 @@ export const isPhone = (phone: string): boolean => {
 
 // 身份证号验证（中国大陆）
 export const isIdCard = (idCard: string): boolean => {
-  const idCardRegex = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
-  
+  const idCardRegex =
+    /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
+
   if (!idCardRegex.test(idCard)) {
     return false
   }
-  
+
   // 验证校验码
   const weights = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
   const checkCodes = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
-  
+
   let sum = 0
   for (let i = 0; i < 17; i++) {
     sum += parseInt(idCard[i]) * weights[i]
   }
-  
+
   const checkCode = checkCodes[sum % 11]
   return checkCode === idCard[17].toUpperCase()
 }
@@ -64,60 +65,70 @@ export const isMac = (mac: string): boolean => {
 }
 
 // 密码强度验证
-export const validatePassword = (password: string): {
+export const validatePassword = (
+  password: string
+): {
   isValid: boolean
   strength: 'weak' | 'medium' | 'strong'
   errors: string[]
 } => {
   const errors: string[] = []
   let score = 0
-  
+
   // 长度检查
   if (password.length < 8) {
     errors.push('密码长度至少8位')
   } else {
     score += 1
   }
-  
+
   // 包含小写字母
   if (!/[a-z]/.test(password)) {
     errors.push('密码必须包含小写字母')
   } else {
     score += 1
   }
-  
+
   // 包含大写字母
   if (!/[A-Z]/.test(password)) {
     errors.push('密码必须包含大写字母')
   } else {
     score += 1
   }
-  
+
   // 包含数字
   if (!/\d/.test(password)) {
     errors.push('密码必须包含数字')
   } else {
     score += 1
   }
-  
+
   // 包含特殊字符
   if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
     errors.push('密码必须包含特殊字符')
   } else {
     score += 1
   }
-  
+
   // 不能包含常见弱密码
   const weakPasswords = [
-    'password', '123456', '123456789', 'qwerty', 'abc123',
-    'password123', '123123', 'admin', 'root', 'user'
+    'password',
+    '123456',
+    '123456789',
+    'qwerty',
+    'abc123',
+    'password123',
+    '123123',
+    'admin',
+    'root',
+    'user',
   ]
-  
+
   if (weakPasswords.some(weak => password.toLowerCase().includes(weak))) {
     errors.push('密码不能包含常见弱密码')
     score = Math.max(0, score - 2)
   }
-  
+
   let strength: 'weak' | 'medium' | 'strong'
   if (score <= 2) {
     strength = 'weak'
@@ -126,11 +137,11 @@ export const validatePassword = (password: string): {
   } else {
     strength = 'strong'
   }
-  
+
   return {
     isValid: errors.length === 0,
     strength,
-    errors
+    errors,
   }
 }
 
@@ -171,9 +182,7 @@ export const isPositiveInteger = (value: string): boolean => {
 
 // 小数验证
 export const isDecimal = (value: string, precision?: number): boolean => {
-  const decimalRegex = precision
-    ? new RegExp(`^\\d+\\.\\d{1,${precision}}$`)
-    : /^\d+\.\d+$/
+  const decimalRegex = precision ? new RegExp(`^\\d+\\.\\d{1,${precision}}$`) : /^\d+\.\d+$/
   return decimalRegex.test(value)
 }
 
@@ -187,30 +196,30 @@ export const isMoney = (value: string): boolean => {
 export const isBankCard = (cardNumber: string): boolean => {
   // 移除空格和连字符
   const cleanCardNumber = cardNumber.replace(/[\s-]/g, '')
-  
+
   // 长度检查（一般为13-19位）
   if (!/^\d{13,19}$/.test(cleanCardNumber)) {
     return false
   }
-  
+
   // Luhn算法验证
   let sum = 0
   let isEven = false
-  
+
   for (let i = cleanCardNumber.length - 1; i >= 0; i--) {
     let digit = parseInt(cleanCardNumber[i])
-    
+
     if (isEven) {
       digit *= 2
       if (digit > 9) {
         digit -= 9
       }
     }
-    
+
     sum += digit
     isEven = !isEven
   }
-  
+
   return sum % 10 === 0
 }
 
@@ -235,31 +244,33 @@ export const isWechat = (wechat: string): boolean => {
 // 车牌号验证（中国）
 export const isLicensePlate = (plate: string): boolean => {
   // 普通车牌
-  const normalPlateRegex = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]{4}[A-Z0-9挂学警港澳]$/
+  const normalPlateRegex =
+    /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]{4}[A-Z0-9挂学警港澳]$/
   // 新能源车牌
-  const newEnergyPlateRegex = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]{5}$/
-  
+  const newEnergyPlateRegex =
+    /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-Z0-9]{5}$/
+
   return normalPlateRegex.test(plate) || newEnergyPlateRegex.test(plate)
 }
 
 // 统一社会信用代码验证
 export const isSocialCreditCode = (code: string): boolean => {
   const socialCreditRegex = /^[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}$/
-  
+
   if (!socialCreditRegex.test(code)) {
     return false
   }
-  
+
   // 校验码验证
   const weights = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28]
   const chars = '0123456789ABCDEFGHJKLMNPQRTUWXY'
-  
+
   let sum = 0
   for (let i = 0; i < 17; i++) {
     const charIndex = chars.indexOf(code[i])
     sum += charIndex * weights[i]
   }
-  
+
   const checkCode = chars[31 - (sum % 31)]
   return checkCode === code[17]
 }
@@ -312,18 +323,18 @@ export const isDateFormat = (date: string, format = 'YYYY-MM-DD'): boolean => {
     'YYYY/MM/DD': /^\d{4}\/\d{2}\/\d{2}$/,
     'DD/MM/YYYY': /^\d{2}\/\d{2}\/\d{4}$/,
     'MM/DD/YYYY': /^\d{2}\/\d{2}\/\d{4}$/,
-    'YYYY-MM-DD HH:mm:ss': /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/
+    'YYYY-MM-DD HH:mm:ss': /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/,
   }
-  
+
   const regex = formatRegexMap[format]
   if (!regex) {
     return false
   }
-  
+
   if (!regex.test(date)) {
     return false
   }
-  
+
   // 验证日期是否有效
   const parsedDate = new Date(date)
   return !isNaN(parsedDate.getTime())
@@ -334,9 +345,9 @@ export const isTimeFormat = (time: string, format = 'HH:mm:ss'): boolean => {
   const formatRegexMap: Record<string, RegExp> = {
     'HH:mm': /^([01]?\d|2[0-3]):[0-5]\d$/,
     'HH:mm:ss': /^([01]?\d|2[0-3]):[0-5]\d:[0-5]\d$/,
-    'hh:mm A': /^(0?[1-9]|1[0-2]):[0-5]\d [AP]M$/i
+    'hh:mm A': /^(0?[1-9]|1[0-2]):[0-5]\d [AP]M$/i,
   }
-  
+
   const regex = formatRegexMap[format]
   return regex ? regex.test(time) : false
 }
@@ -346,10 +357,12 @@ export const isColor = (color: string): boolean => {
   // HEX颜色
   const hexRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
   // RGB颜色
-  const rgbRegex = /^rgb\(\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*\)$/
+  const rgbRegex =
+    /^rgb\(\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*\)$/
   // RGBA颜色
-  const rgbaRegex = /^rgba\(\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*(0|1|0?\.\d+)\s*\)$/
-  
+  const rgbaRegex =
+    /^rgba\(\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*([01]?\d\d?|2[0-4]\d|25[0-5])\s*,\s*(0|1|0?\.\d+)\s*\)$/
+
   return hexRegex.test(color) || rgbRegex.test(color) || rgbaRegex.test(color)
 }
 

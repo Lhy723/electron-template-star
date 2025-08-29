@@ -48,7 +48,7 @@ const indexHtml = path.join(process.env.DIST, 'index.html')
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Electron Template Star',
-    icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    icon: path.join(process.env.VITE_PUBLIC || '', 'favicon.ico'),
     width: 1200,
     height: 800,
     minWidth: 800,
@@ -64,7 +64,8 @@ async function createWindow() {
   })
 
   if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
-    win.loadURL(url)
+    // 确保 url 不为 undefined 后再加载
+    if (url) win.loadURL(url)
     // Open devTool if the app is not packaged
     win.webContents.openDevTools()
   } else {

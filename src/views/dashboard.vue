@@ -5,7 +5,8 @@
       <div>
         <h1 class="text-3xl font-bold tracking-tight">{{ greeting }}</h1>
         <p class="text-muted-foreground">
-          欢迎回来，{{ userStore.userInfo?.name || '用户' }}！今天是 {{ formatDate(new Date(), 'YYYY年MM月DD日') }}
+          欢迎回来，{{ userStore.userInfo?.name || '用户' }}！今天是
+          {{ formatDate(new Date(), 'YYYY年MM月DD日') }}
         </p>
       </div>
       <div class="flex items-center space-x-4">
@@ -27,7 +28,9 @@
               <p class="text-sm font-medium text-muted-foreground">总用户数</p>
               <p class="text-2xl font-bold">{{ statistics.totalUsers.toLocaleString() }}</p>
             </div>
-            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center"
+            >
               <el-icon class="text-blue-600 dark:text-blue-400">
                 <User />
               </el-icon>
@@ -47,7 +50,9 @@
               <p class="text-sm font-medium text-muted-foreground">活跃用户</p>
               <p class="text-2xl font-bold">{{ statistics.activeUsers.toLocaleString() }}</p>
             </div>
-            <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center"
+            >
               <el-icon class="text-green-600 dark:text-green-400">
                 <TrendCharts />
               </el-icon>
@@ -67,7 +72,9 @@
               <p class="text-sm font-medium text-muted-foreground">总订单</p>
               <p class="text-2xl font-bold">{{ statistics.totalOrders.toLocaleString() }}</p>
             </div>
-            <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center"
+            >
               <el-icon class="text-orange-600 dark:text-orange-400">
                 <ShoppingCart />
               </el-icon>
@@ -87,7 +94,9 @@
               <p class="text-sm font-medium text-muted-foreground">总收入</p>
               <p class="text-2xl font-bold">¥{{ statistics.totalRevenue.toLocaleString() }}</p>
             </div>
-            <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+            <div
+              class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center"
+            >
               <el-icon class="text-purple-600 dark:text-purple-400">
                 <Money />
               </el-icon>
@@ -180,7 +189,7 @@ import {
   Grid,
   Brush,
   Setting,
-  Download
+  Download,
 } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/user'
 import { Button, Card, CardHeader, CardTitle, CardContent } from '@/components/ui'
@@ -197,93 +206,93 @@ const statistics = reactive({
   totalUsers: 12543,
   activeUsers: 8932,
   totalOrders: 3421,
-  totalRevenue: 234567
+  totalRevenue: 234567,
 })
 
 const recentActivities = ref([
   {
     id: 1,
     title: '用户张三完成了订单支付',
-    time: new Date(Date.now() - 5 * 60 * 1000)
+    time: new Date(Date.now() - 5 * 60 * 1000),
   },
   {
     id: 2,
     title: '系统自动备份完成',
-    time: new Date(Date.now() - 15 * 60 * 1000)
+    time: new Date(Date.now() - 15 * 60 * 1000),
   },
   {
     id: 3,
     title: '新用户李四注册成功',
-    time: new Date(Date.now() - 30 * 60 * 1000)
+    time: new Date(Date.now() - 30 * 60 * 1000),
   },
   {
     id: 4,
     title: '产品A库存预警',
-    time: new Date(Date.now() - 45 * 60 * 1000)
+    time: new Date(Date.now() - 45 * 60 * 1000),
   },
   {
     id: 5,
     title: '管理员更新了系统配置',
-    time: new Date(Date.now() - 60 * 60 * 1000)
-  }
+    time: new Date(Date.now() - 60 * 60 * 1000),
+  },
 ])
 
 const initChart = () => {
   if (!chartRef.value) return
-  
+
   const chart = echarts.init(chartRef.value)
-  
+
   const option = {
     tooltip: {
       trigger: 'axis',
       axisPointer: {
         type: 'cross',
         label: {
-          backgroundColor: '#6a7985'
-        }
-      }
+          backgroundColor: '#6a7985',
+        },
+      },
     },
     legend: {
-      data: ['用户数', '订单数', '收入']
+      data: ['用户数', '订单数', '收入'],
     },
     grid: {
       left: '3%',
       right: '4%',
       bottom: '3%',
-      containLabel: true
+      containLabel: true,
     },
     xAxis: {
       type: 'category',
       boundaryGap: false,
-      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月']
+      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
     },
     yAxis: {
-      type: 'value'
+      type: 'value',
     },
     series: [
       {
         name: '用户数',
         type: 'line',
         stack: 'Total',
-        data: [120, 132, 101, 134, 90, 230, 210]
+        data: [120, 132, 101, 134, 90, 230, 210],
       },
       {
         name: '订单数',
         type: 'line',
         stack: 'Total',
-        data: [220, 182, 191, 234, 290, 330, 310]
+        data: [220, 182, 191, 234, 290, 330, 310],
       },
       {
         name: '收入',
         type: 'line',
         stack: 'Total',
-        data: [150, 232, 201, 154, 190, 330, 410]
-      }
-    ]
+        data: [150, 232, 201, 154, 190, 330, 410],
+      },
+    ],
   }
-  
+
   chart.setOption(option)
-  
+
   // 响应式调整
   window.addEventListener('resize', () => {
     chart.resize()

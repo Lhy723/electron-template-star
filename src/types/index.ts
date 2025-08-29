@@ -43,7 +43,21 @@ export interface TableColumn {
 export interface FormRule {
   required?: boolean
   message?: string
-  type?: 'string' | 'number' | 'boolean' | 'method' | 'regexp' | 'integer' | 'float' | 'array' | 'object' | 'enum' | 'date' | 'url' | 'hex' | 'email'
+  type?:
+    | 'string'
+    | 'number'
+    | 'boolean'
+    | 'method'
+    | 'regexp'
+    | 'integer'
+    | 'float'
+    | 'array'
+    | 'object'
+    | 'enum'
+    | 'date'
+    | 'url'
+    | 'hex'
+    | 'email'
   min?: number
   max?: number
   pattern?: RegExp
@@ -54,7 +68,20 @@ export interface FormRule {
 export interface FormItem {
   prop: string
   label: string
-  type: 'input' | 'password' | 'textarea' | 'select' | 'radio' | 'checkbox' | 'date' | 'time' | 'datetime' | 'number' | 'switch' | 'upload' | 'custom'
+  type:
+    | 'input'
+    | 'password'
+    | 'textarea'
+    | 'select'
+    | 'radio'
+    | 'checkbox'
+    | 'date'
+    | 'time'
+    | 'datetime'
+    | 'number'
+    | 'switch'
+    | 'upload'
+    | 'custom'
   placeholder?: string
   options?: Array<{ label: string; value: any; disabled?: boolean }>
   rules?: FormRule[]

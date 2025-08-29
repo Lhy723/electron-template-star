@@ -14,11 +14,11 @@
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="grid gap-4 md:grid-cols-3">
-          <div 
+          <div
             class="relative cursor-pointer rounded-lg border-2 p-4 transition-colors"
             :class="{
               'border-primary': themeStore.config.mode === 'light',
-              'border-muted': themeStore.config.mode !== 'light'
+              'border-muted': themeStore.config.mode !== 'light',
             }"
             @click="setTheme('light')"
           >
@@ -27,20 +27,18 @@
                 <el-icon><Sunny /></el-icon>
                 <span class="font-medium">浅色模式</span>
               </div>
-              <div class="text-sm text-muted-foreground">
-                明亮清爽的界面风格
-              </div>
+              <div class="text-sm text-muted-foreground">明亮清爽的界面风格</div>
             </div>
             <div v-if="themeStore.config.mode === 'light'" class="absolute top-2 right-2">
               <el-icon class="text-primary"><Check /></el-icon>
             </div>
           </div>
 
-          <div 
+          <div
             class="relative cursor-pointer rounded-lg border-2 p-4 transition-colors"
             :class="{
               'border-primary': themeStore.config.mode === 'dark',
-              'border-muted': themeStore.config.mode !== 'dark'
+              'border-muted': themeStore.config.mode !== 'dark',
             }"
             @click="setTheme('dark')"
           >
@@ -49,20 +47,18 @@
                 <el-icon><Moon /></el-icon>
                 <span class="font-medium">深色模式</span>
               </div>
-              <div class="text-sm text-muted-foreground">
-                护眼的深色界面风格
-              </div>
+              <div class="text-sm text-muted-foreground">护眼的深色界面风格</div>
             </div>
             <div v-if="themeStore.config.mode === 'dark'" class="absolute top-2 right-2">
               <el-icon class="text-primary"><Check /></el-icon>
             </div>
           </div>
 
-          <div 
+          <div
             class="relative cursor-pointer rounded-lg border-2 p-4 transition-colors"
             :class="{
               'border-primary': themeStore.config.mode === 'auto',
-              'border-muted': themeStore.config.mode !== 'auto'
+              'border-muted': themeStore.config.mode !== 'auto',
             }"
             @click="setTheme('auto')"
           >
@@ -71,9 +67,7 @@
                 <el-icon><Monitor /></el-icon>
                 <span class="font-medium">跟随系统</span>
               </div>
-              <div class="text-sm text-muted-foreground">
-                根据系统设置自动切换
-              </div>
+              <div class="text-sm text-muted-foreground">根据系统设置自动切换</div>
             </div>
             <div v-if="themeStore.config.mode === 'auto'" class="absolute top-2 right-2">
               <el-icon class="text-primary"><Check /></el-icon>
@@ -90,18 +84,18 @@
       </CardHeader>
       <CardContent class="space-y-4">
         <div class="grid gap-4 md:grid-cols-5">
-          <div 
-            v-for="color in availableColors" 
+          <div
+            v-for="color in availableColors"
             :key="color.name"
             class="relative cursor-pointer rounded-lg border-2 p-4 transition-colors"
             :class="{
               'border-primary': themeStore.config.color === color.value,
-              'border-muted': themeStore.config.color !== color.value
+              'border-muted': themeStore.config.color !== color.value,
             }"
             @click="setPrimaryColor(color.value)"
           >
             <div class="space-y-2">
-              <div 
+              <div
                 class="w-8 h-8 rounded-full mx-auto"
                 :style="{ backgroundColor: themeColors[color.value].primary }"
               ></div>
@@ -112,14 +106,14 @@
             </div>
           </div>
         </div>
-        
+
         <div class="space-y-2">
           <label class="text-sm font-medium">预设主题</label>
           <div class="flex flex-wrap gap-2">
-            <Button 
-              v-for="(preset, key) in themePresets" 
+            <Button
+              v-for="(preset, key) in themePresets"
               :key="key"
-              variant="outline" 
+              variant="outline"
               size="sm"
               @click="loadPreset(key)"
             >
@@ -142,9 +136,12 @@
               <div class="font-medium">侧边栏折叠</div>
               <div class="text-sm text-muted-foreground">折叠侧边栏以节省空间</div>
             </div>
-            <el-switch v-model="themeStore.config.sidebarCollapsed" @change="themeStore.saveTheme" />
+            <el-switch
+              v-model="themeStore.config.sidebarCollapsed"
+              @change="themeStore.saveTheme"
+            />
           </div>
-          
+
           <div class="flex items-center justify-between">
             <div>
               <div class="font-medium">显示面包屑</div>
@@ -152,7 +149,7 @@
             </div>
             <el-switch v-model="themeStore.config.showBreadcrumb" @change="themeStore.saveTheme" />
           </div>
-          
+
           <div class="flex items-center justify-between">
             <div>
               <div class="font-medium">显示标签页</div>
@@ -160,7 +157,7 @@
             </div>
             <el-switch v-model="themeStore.config.showTabs" @change="themeStore.saveTheme" />
           </div>
-          
+
           <div class="flex items-center justify-between">
             <div>
               <div class="font-medium">显示页脚</div>
@@ -168,7 +165,7 @@
             </div>
             <el-switch v-model="themeStore.config.showFooter" @change="themeStore.saveTheme" />
           </div>
-          
+
           <div class="flex items-center justify-between">
             <div>
               <div class="font-medium">固定头部</div>
@@ -176,7 +173,7 @@
             </div>
             <el-switch v-model="themeStore.config.fixedHeader" @change="themeStore.saveTheme" />
           </div>
-          
+
           <div class="flex items-center justify-between">
             <div>
               <div class="font-medium">固定侧边栏</div>
@@ -201,10 +198,14 @@
           </div>
           <el-switch v-model="themeStore.config.enableTransition" @change="themeStore.saveTheme" />
         </div>
-        
+
         <div class="space-y-2">
           <label class="text-sm font-medium">过渡动画类型</label>
-          <el-select v-model="themeStore.config.transitionName" @change="themeStore.saveTheme" class="w-full">
+          <el-select
+            v-model="themeStore.config.transitionName"
+            @change="themeStore.saveTheme"
+            class="w-full"
+          >
             <el-option label="淡入淡出" value="fade" />
             <el-option label="滑动" value="slide" />
             <el-option label="缩放" value="zoom" />
@@ -223,23 +224,32 @@
         <div class="space-y-2">
           <label class="text-sm font-medium">主题预设</label>
           <div class="grid gap-2 md:grid-cols-3">
-            <Button 
-              variant="outline" 
-              :class="{ 'border-primary': JSON.stringify(themeStore.config) === JSON.stringify(themePresets.default) }"
+            <Button
+              variant="outline"
+              :class="{
+                'border-primary':
+                  JSON.stringify(themeStore.config) === JSON.stringify(themePresets.default),
+              }"
               @click="loadPreset('default')"
             >
               默认主题
             </Button>
-            <Button 
-              variant="outline" 
-              :class="{ 'border-primary': JSON.stringify(themeStore.config) === JSON.stringify(themePresets.dark) }"
+            <Button
+              variant="outline"
+              :class="{
+                'border-primary':
+                  JSON.stringify(themeStore.config) === JSON.stringify(themePresets.dark),
+              }"
               @click="loadPreset('dark')"
             >
               深色主题
             </Button>
-            <Button 
-              variant="outline" 
-              :class="{ 'border-primary': JSON.stringify(themeStore.config) === JSON.stringify(themePresets.minimal) }"
+            <Button
+              variant="outline"
+              :class="{
+                'border-primary':
+                  JSON.stringify(themeStore.config) === JSON.stringify(themePresets.minimal),
+              }"
               @click="loadPreset('minimal')"
             >
               简约主题
@@ -255,7 +265,7 @@
         <el-icon class="mr-2"><RefreshLeft /></el-icon>
         重置为默认
       </Button>
-      
+
       <div class="space-x-2">
         <Button variant="outline" @click="exportTheme">
           <el-icon class="mr-2"><Download /></el-icon>
@@ -273,15 +283,7 @@
 <script setup lang="ts">
 // import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import {
-  Sunny,
-  Moon,
-  Monitor,
-  Check,
-  RefreshLeft,
-  Download,
-  Upload
-} from '@element-plus/icons-vue'
+import { Sunny, Moon, Monitor, Check, RefreshLeft, Download, Upload } from '@element-plus/icons-vue'
 import { useThemeStore, themeColors, themePresets } from '@/stores/theme'
 import { Button, Card, CardHeader, CardTitle, CardContent } from '@/components/ui'
 import type { ThemeMode, ThemeColor } from '@/stores/theme'
@@ -293,12 +295,14 @@ const availableColors = [
   { name: '绿色', value: 'green' as ThemeColor },
   { name: '紫色', value: 'purple' as ThemeColor },
   { name: '橙色', value: 'orange' as ThemeColor },
-  { name: '红色', value: 'red' as ThemeColor }
+  { name: '红色', value: 'red' as ThemeColor },
 ]
 
 const setTheme = (theme: ThemeMode) => {
   themeStore.setThemeMode(theme)
-  ElMessage.success(`已切换到${theme === 'light' ? '浅色' : theme === 'dark' ? '深色' : '自动'}模式`)
+  ElMessage.success(
+    `已切换到${theme === 'light' ? '浅色' : theme === 'dark' ? '深色' : '自动'}模式`
+  )
 }
 
 const setPrimaryColor = (color: ThemeColor) => {
@@ -308,7 +312,9 @@ const setPrimaryColor = (color: ThemeColor) => {
 
 const loadPreset = (presetName: keyof typeof themePresets) => {
   themeStore.loadPreset(presetName)
-  ElMessage.success(`已加载${presetName === 'default' ? '默认' : presetName === 'dark' ? '深色' : '简约'}主题预设`)
+  ElMessage.success(
+    `已加载${presetName === 'default' ? '默认' : presetName === 'dark' ? '深色' : '简约'}主题预设`
+  )
 }
 
 const resetTheme = () => {
@@ -318,7 +324,7 @@ const resetTheme = () => {
 
 const exportTheme = () => {
   const themeConfig = themeStore.exportTheme()
-  
+
   const blob = new Blob([JSON.stringify(themeConfig, null, 2)], { type: 'application/json' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
@@ -326,7 +332,7 @@ const exportTheme = () => {
   a.download = 'theme-config.json'
   a.click()
   URL.revokeObjectURL(url)
-  
+
   ElMessage.success('主题配置已导出')
 }
 
@@ -334,11 +340,11 @@ const importTheme = () => {
   const input = document.createElement('input')
   input.type = 'file'
   input.accept = '.json'
-  input.onchange = (e) => {
+  input.onchange = e => {
     const file = (e.target as HTMLInputElement).files?.[0]
     if (file) {
       const reader = new FileReader()
-      reader.onload = (e) => {
+      reader.onload = e => {
         try {
           const config = JSON.parse(e.target?.result as string)
           themeStore.importTheme(config)

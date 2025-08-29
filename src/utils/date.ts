@@ -8,11 +8,11 @@ export const formatDate = (
   format = 'YYYY-MM-DD HH:mm:ss'
 ): string => {
   const d = new Date(date)
-  
+
   if (isNaN(d.getTime())) {
     return ''
   }
-  
+
   const year = d.getFullYear()
   const month = d.getMonth() + 1
   const day = d.getDate()
@@ -20,7 +20,7 @@ export const formatDate = (
   const minute = d.getMinutes()
   const second = d.getSeconds()
   const millisecond = d.getMilliseconds()
-  
+
   const formatMap: Record<string, string> = {
     YYYY: year.toString(),
     YY: year.toString().slice(-2),
@@ -35,11 +35,13 @@ export const formatDate = (
     ss: second.toString().padStart(2, '0'),
     s: second.toString(),
     SSS: millisecond.toString().padStart(3, '0'),
-    SS: Math.floor(millisecond / 10).toString().padStart(2, '0'),
-    S: Math.floor(millisecond / 100).toString()
+    SS: Math.floor(millisecond / 10)
+      .toString()
+      .padStart(2, '0'),
+    S: Math.floor(millisecond / 100).toString(),
   }
-  
-  return format.replace(/YYYY|YY|MM|M|DD|D|HH|H|mm|m|ss|s|SSS|SS|S/g, (match) => {
+
+  return format.replace(/YYYY|YY|MM|M|DD|D|HH|H|mm|m|ss|s|SSS|SS|S/g, match => {
     return formatMap[match] || match
   })
 }
@@ -49,18 +51,18 @@ export const formatRelativeTime = (date: Date | string | number): string => {
   const d = new Date(date)
   const now = new Date()
   const diff = now.getTime() - d.getTime()
-  
+
   if (isNaN(d.getTime())) {
     return ''
   }
-  
+
   const minute = 60 * 1000
   const hour = 60 * minute
   const day = 24 * hour
   const week = 7 * day
   const month = 30 * day
   const year = 365 * day
-  
+
   if (diff < minute) {
     return '刚刚'
   } else if (diff < hour) {
@@ -82,7 +84,7 @@ export const formatRelativeTime = (date: Date | string | number): string => {
 export const getTimeOfDay = (date?: Date | string | number): string => {
   const d = date ? new Date(date) : new Date()
   const hour = d.getHours()
-  
+
   if (hour >= 5 && hour < 12) {
     return '上午'
   } else if (hour >= 12 && hour < 18) {
@@ -98,7 +100,7 @@ export const getTimeOfDay = (date?: Date | string | number): string => {
 export const getGreeting = (date?: Date | string | number): string => {
   const d = date ? new Date(date) : new Date()
   const hour = d.getHours()
-  
+
   if (hour >= 5 && hour < 12) {
     return '早上好'
   } else if (hour >= 12 && hour < 14) {
@@ -116,7 +118,7 @@ export const getGreeting = (date?: Date | string | number): string => {
 export const isToday = (date: Date | string | number): boolean => {
   const d = new Date(date)
   const today = new Date()
-  
+
   return (
     d.getFullYear() === today.getFullYear() &&
     d.getMonth() === today.getMonth() &&
@@ -129,7 +131,7 @@ export const isYesterday = (date: Date | string | number): boolean => {
   const d = new Date(date)
   const yesterday = new Date()
   yesterday.setDate(yesterday.getDate() - 1)
-  
+
   return (
     d.getFullYear() === yesterday.getFullYear() &&
     d.getMonth() === yesterday.getMonth() &&
@@ -144,11 +146,11 @@ export const isThisWeek = (date: Date | string | number): boolean => {
   const startOfWeek = new Date(today)
   startOfWeek.setDate(today.getDate() - today.getDay())
   startOfWeek.setHours(0, 0, 0, 0)
-  
+
   const endOfWeek = new Date(startOfWeek)
   endOfWeek.setDate(startOfWeek.getDate() + 6)
   endOfWeek.setHours(23, 59, 59, 999)
-  
+
   return d >= startOfWeek && d <= endOfWeek
 }
 
@@ -156,18 +158,15 @@ export const isThisWeek = (date: Date | string | number): boolean => {
 export const isThisMonth = (date: Date | string | number): boolean => {
   const d = new Date(date)
   const today = new Date()
-  
-  return (
-    d.getFullYear() === today.getFullYear() &&
-    d.getMonth() === today.getMonth()
-  )
+
+  return d.getFullYear() === today.getFullYear() && d.getMonth() === today.getMonth()
 }
 
 // 判断是否为本年
 export const isThisYear = (date: Date | string | number): boolean => {
   const d = new Date(date)
   const today = new Date()
-  
+
   return d.getFullYear() === today.getFullYear()
 }
 
@@ -189,13 +188,13 @@ export const getDateRange = (
   const start = new Date(startDate)
   const end = new Date(endDate)
   const dates: Date[] = []
-  
+
   const current = new Date(start)
   while (current <= end) {
     dates.push(new Date(current))
     current.setDate(current.getDate() + 1)
   }
-  
+
   return dates
 }
 
@@ -203,14 +202,14 @@ export const getDateRange = (
 export const calculateAge = (birthDate: Date | string | number): number => {
   const birth = new Date(birthDate)
   const today = new Date()
-  
+
   let age = today.getFullYear() - birth.getFullYear()
   const monthDiff = today.getMonth() - birth.getMonth()
-  
+
   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
     age--
   }
-  
+
   return age
 }
 
@@ -221,7 +220,7 @@ export const daysBetween = (
 ): number => {
   const d1 = new Date(date1)
   const d2 = new Date(date2)
-  
+
   const timeDiff = Math.abs(d2.getTime() - d1.getTime())
   return Math.ceil(timeDiff / (1000 * 3600 * 24))
 }
@@ -305,7 +304,7 @@ export const convertTimezone = (
   toTimezone: string
 ): Date => {
   const d = new Date(date)
-  
+
   // 使用Intl.DateTimeFormat进行时区转换
   // const fromDate = new Intl.DateTimeFormat('en-US', {
   //   timeZone: fromTimezone,
@@ -317,7 +316,7 @@ export const convertTimezone = (
   //   second: '2-digit',
   //   hour12: false
   // }).formatToParts(d)
-  
+
   const toDate = new Intl.DateTimeFormat('en-US', {
     timeZone: toTimezone,
     year: 'numeric',
@@ -326,9 +325,9 @@ export const convertTimezone = (
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hour12: false
+    hour12: false,
   }).formatToParts(d)
-  
+
   // 构建转换后的日期
   const year = parseInt(toDate.find(part => part.type === 'year')?.value || '0')
   const month = parseInt(toDate.find(part => part.type === 'month')?.value || '0') - 1
@@ -336,7 +335,7 @@ export const convertTimezone = (
   const hour = parseInt(toDate.find(part => part.type === 'hour')?.value || '0')
   const minute = parseInt(toDate.find(part => part.type === 'minute')?.value || '0')
   const second = parseInt(toDate.find(part => part.type === 'second')?.value || '0')
-  
+
   return new Date(year, month, day, hour, minute, second)
 }
 
@@ -365,6 +364,6 @@ export const getTimezones = (): string[] => {
     'America/Sao_Paulo',
     'Australia/Sydney',
     'Australia/Melbourne',
-    'Pacific/Auckland'
+    'Pacific/Auckland',
   ]
 }

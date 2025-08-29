@@ -10,8 +10,8 @@ export const constantRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/login.vue'),
     meta: {
       title: '登录',
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     path: '/',
@@ -25,8 +25,8 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           title: '仪表盘',
           icon: 'Odometer',
-          affix: true
-        }
+          affix: true,
+        },
       },
       {
         path: 'components',
@@ -34,8 +34,8 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/components.vue'),
         meta: {
           title: '组件示例',
-          icon: 'Grid'
-        }
+          icon: 'Grid',
+        },
       },
       {
         path: 'theme',
@@ -43,14 +43,12 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/theme.vue'),
         meta: {
           title: '主题设置',
-          icon: 'Brush'
-        }
-      }
-    ]
-  }
+          icon: 'Brush',
+        },
+      },
+    ],
+  },
 ]
-
-
 
 // 404路由
 const notFoundRoute: RouteRecordRaw = {
@@ -59,14 +57,14 @@ const notFoundRoute: RouteRecordRaw = {
   redirect: '/dashboard',
   meta: {
     title: '页面不存在',
-    hidden: true
-  }
+    hidden: true,
+  },
 }
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [...constantRoutes, notFoundRoute],
-  scrollBehavior: () => ({ left: 0, top: 0 })
+  scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 
 // 路由守卫

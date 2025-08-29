@@ -50,20 +50,20 @@ export const useMenuStore = defineStore('menu', () => {
   // 方法
   const generateRoutes = async (): Promise<RouteRecordRaw[]> => {
     routes.value = constantRoutes
-    
+
     // 生成菜单列表
     menuList.value = generateMenus(routes.value)
-    
+
     return []
   }
 
   const generateMenus = (routes: RouteRecordRaw[]): MenuItem[] => {
     const menus: MenuItem[] = []
-    
+
     routes.forEach(route => {
       if (!route.meta?.hidden) {
         const menu: MenuItem = {
-          id: route.name as string || route.path,
+          id: (route.name as string) || route.path,
           title: route.meta?.title || route.path,
           icon: route.meta?.icon,
           path: route.path,
@@ -72,31 +72,29 @@ export const useMenuStore = defineStore('menu', () => {
           hidden: route.meta?.hidden,
           roles: route.meta?.roles,
           permissions: route.meta?.permissions,
-          meta: route.meta
+          meta: route.meta,
         }
-        
+
         if (route.children && route.children.length > 0) {
           menu.children = generateMenus(route.children)
         }
-        
+
         menus.push(menu)
       }
     })
-    
+
     return menus
   }
-
-
 
   const filterMenus = (menus: MenuItem[]): MenuItem[] => {
     return menus.filter(menu => {
       if (menu.hidden) return false
-      
+
       if (menu.children) {
         menu.children = filterMenus(menu.children)
         return menu.children.length > 0 || menu.alwaysShow
       }
-      
+
       return true
     })
   }
@@ -106,7 +104,7 @@ export const useMenuStore = defineStore('menu', () => {
       if (menu.path === path) {
         return [menu]
       }
-      
+
       if (menu.children) {
         const childPath = findMenuPath(menu.children, path)
         if (childPath.length > 0) {
@@ -145,10 +143,10 @@ export const useMenuStore = defineStore('menu', () => {
 
   const addVisitedView = (view: MenuItem) => {
     if (visitedViews.value.some(v => v.path === view.path)) return
-    
+
     visitedViews.value.push({
       ...view,
-      title: view.meta?.title || view.title
+      title: view.meta?.title || view.title,
     })
   }
 
@@ -240,11 +238,11 @@ export const useMenuStore = defineStore('menu', () => {
     openedMenus,
     cachedViews,
     visitedViews,
-    
+
     // 计算属性
     sidebarMenus,
     breadcrumbList,
-    
+
     // 方法
     generateRoutes,
     generateMenus,
@@ -265,6 +263,6 @@ export const useMenuStore = defineStore('menu', () => {
     delAllVisitedViews,
     delAllCachedViews,
     updateVisitedView,
-    resetMenuState
+    resetMenuState,
   }
 })

@@ -31,7 +31,7 @@ export const themePresets = {
     fixedHeader: true,
     fixedSidebar: true,
     enableTransition: true,
-    transitionName: 'fade'
+    transitionName: 'fade',
   },
   dark: {
     mode: 'dark' as ThemeMode,
@@ -43,7 +43,7 @@ export const themePresets = {
     fixedHeader: true,
     fixedSidebar: true,
     enableTransition: true,
-    transitionName: 'fade'
+    transitionName: 'fade',
   },
   minimal: {
     mode: 'light' as ThemeMode,
@@ -55,8 +55,8 @@ export const themePresets = {
     fixedHeader: false,
     fixedSidebar: false,
     enableTransition: false,
-    transitionName: 'none'
-  }
+    transitionName: 'none',
+  },
 }
 
 // 主题颜色配置
@@ -64,34 +64,34 @@ export const themeColors = {
   blue: {
     primary: '#409eff',
     primaryLight: '#79bbff',
-    primaryDark: '#337ecc'
+    primaryDark: '#337ecc',
   },
   green: {
     primary: '#67c23a',
     primaryLight: '#95d475',
-    primaryDark: '#529b2e'
+    primaryDark: '#529b2e',
   },
   purple: {
     primary: '#9c27b0',
     primaryLight: '#ba68c8',
-    primaryDark: '#7b1fa2'
+    primaryDark: '#7b1fa2',
   },
   orange: {
     primary: '#ff9800',
     primaryLight: '#ffb74d',
-    primaryDark: '#f57c00'
+    primaryDark: '#f57c00',
   },
   red: {
     primary: '#f56c6c',
     primaryLight: '#f89898',
-    primaryDark: '#dd6161'
-  }
+    primaryDark: '#dd6161',
+  },
 }
 
 export const useThemeStore = defineStore('theme', () => {
   // 状态
   const config = ref<ThemeConfig>({
-    ...themePresets.default
+    ...themePresets.default,
   })
 
   // 计算属性
@@ -131,7 +131,7 @@ export const useThemeStore = defineStore('theme', () => {
 
   const applyTheme = () => {
     const html = document.documentElement
-    
+
     // 应用暗色模式
     if (isDark.value) {
       html.classList.add('dark')
@@ -220,11 +220,11 @@ export const useThemeStore = defineStore('theme', () => {
   return {
     // 状态
     config,
-    
+
     // 计算属性
     isDark,
     currentThemeColor,
-    
+
     // 方法
     initTheme,
     applyTheme,
@@ -238,6 +238,6 @@ export const useThemeStore = defineStore('theme', () => {
     resetTheme,
     saveTheme,
     exportTheme,
-    importTheme
+    importTheme,
   }
 })

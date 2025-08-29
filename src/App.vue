@@ -1,16 +1,16 @@
 <template>
-  <div 
-    id="app" 
+  <div
+    id="app"
     class="h-screen overflow-hidden"
     :class="[
       themeStore.isDark ? 'dark' : '',
       `theme-${themeStore.config.color}`,
       {
-        'compact': themeStore.config.compact,
+        compact: themeStore.config.compact,
         'fixed-header': themeStore.config.fixedHeader,
         'fixed-sidebar': themeStore.config.fixedSidebar,
-        'sidebar-collapsed': themeStore.config.sidebarCollapsed
-      }
+        'sidebar-collapsed': themeStore.config.sidebarCollapsed,
+      },
     ]"
   >
     <router-view />
@@ -35,8 +35,9 @@ html,
 body,
 #app {
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

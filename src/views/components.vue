@@ -24,7 +24,7 @@
             <Button variant="link">链接按钮</Button>
           </div>
         </div>
-        
+
         <div class="space-y-2">
           <h4 class="text-sm font-medium">尺寸</h4>
           <div class="flex flex-wrap gap-2 items-center">
@@ -36,7 +36,7 @@
             </Button>
           </div>
         </div>
-        
+
         <div class="space-y-2">
           <h4 class="text-sm font-medium">状态</h4>
           <div class="flex flex-wrap gap-2">
@@ -86,12 +86,10 @@
               <CardTitle>简单卡片</CardTitle>
             </CardHeader>
             <CardContent>
-              <p class="text-sm text-muted-foreground">
-                这是一个简单的卡片示例，包含标题和内容。
-              </p>
+              <p class="text-sm text-muted-foreground">这是一个简单的卡片示例，包含标题和内容。</p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader>
               <CardTitle class="flex items-center">
@@ -100,20 +98,16 @@
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p class="text-sm text-muted-foreground">
-                这是一个带图标的卡片示例。
-              </p>
+              <p class="text-sm text-muted-foreground">这是一个带图标的卡片示例。</p>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader>
               <CardTitle>操作卡片</CardTitle>
             </CardHeader>
             <CardContent>
-              <p class="text-sm text-muted-foreground mb-4">
-                这是一个带操作按钮的卡片。
-              </p>
+              <p class="text-sm text-muted-foreground mb-4">这是一个带操作按钮的卡片。</p>
               <Button size="sm">操作</Button>
             </CardContent>
           </Card>
@@ -136,7 +130,7 @@
             <Badge variant="outline">描边徽章</Badge>
           </div>
         </div>
-        
+
         <div class="space-y-2">
           <h4 class="text-sm font-medium">使用场景</h4>
           <div class="space-y-2">
@@ -196,7 +190,7 @@
             </el-form-item>
           </el-form>
         </div>
-        
+
         <!-- 数据展示组件 -->
         <div class="space-y-4">
           <h4 class="text-sm font-medium">数据展示</h4>
@@ -211,7 +205,7 @@
                 <el-tag type="danger">标签五</el-tag>
               </div>
             </div>
-            
+
             <div>
               <h5 class="text-xs font-medium mb-2">进度条</h5>
               <div class="space-y-2">
@@ -223,7 +217,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- 反馈组件 -->
         <div class="space-y-4">
           <h4 class="text-sm font-medium">反馈组件</h4>
@@ -256,7 +250,7 @@ const form = reactive({
   email: '',
   gender: 'male',
   hobbies: [],
-  city: ''
+  city: '',
 })
 
 const handleLoading = () => {
@@ -271,7 +265,7 @@ const showMessage = (type: 'success' | 'warning' | 'info' | 'error') => {
     success: '操作成功！',
     warning: '请注意！',
     info: '这是一条信息',
-    error: '操作失败！'
+    error: '操作失败！',
   }
   ElMessage[type](messages[type])
 }
@@ -280,23 +274,21 @@ const showNotification = () => {
   ElNotification({
     title: '通知标题',
     message: '这是一条通知消息',
-    type: 'info'
+    type: 'info',
   })
 }
 
 const showConfirm = () => {
-  ElMessageBox.confirm(
-    '此操作将永久删除该文件, 是否继续?',
-    '提示',
-    {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    }
-  ).then(() => {
-    ElMessage.success('删除成功!')
-  }).catch(() => {
-    ElMessage.info('已取消删除')
+  ElMessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
   })
+    .then(() => {
+      ElMessage.success('删除成功!')
+    })
+    .catch(() => {
+      ElMessage.info('已取消删除')
+    })
 }
 </script>
