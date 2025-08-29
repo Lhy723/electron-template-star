@@ -101,7 +101,7 @@ export const validatePassword = (password: string): {
   }
   
   // 包含特殊字符
-  if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+  if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
     errors.push('密码必须包含特殊字符')
   } else {
     score += 1

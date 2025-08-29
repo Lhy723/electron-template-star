@@ -307,16 +307,16 @@ export const convertTimezone = (
   const d = new Date(date)
   
   // 使用Intl.DateTimeFormat进行时区转换
-  const fromDate = new Intl.DateTimeFormat('en-US', {
-    timeZone: fromTimezone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  }).formatToParts(d)
+  // const fromDate = new Intl.DateTimeFormat('en-US', {
+  //   timeZone: fromTimezone,
+  //   year: 'numeric',
+  //   month: '2-digit',
+  //   day: '2-digit',
+  //   hour: '2-digit',
+  //   minute: '2-digit',
+  //   second: '2-digit',
+  //   hour12: false
+  // }).formatToParts(d)
   
   const toDate = new Intl.DateTimeFormat('en-US', {
     timeZone: toTimezone,

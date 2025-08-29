@@ -30,6 +30,7 @@
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.12.0",
     "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
@@ -58,6 +59,7 @@
     "@vueuse/core": "^10.6.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "echarts": "^6.0.0",
     "element-plus": "^2.4.4",
     "lucide-vue-next": "^0.294.0",
     "pinia": "^2.1.7",

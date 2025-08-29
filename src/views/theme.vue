@@ -271,7 +271,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import {
   Sunny,
@@ -283,11 +283,10 @@ import {
   Upload
 } from '@element-plus/icons-vue'
 import { useThemeStore, themeColors, themePresets } from '@/stores/theme'
-import { Button, Input, Card, CardHeader, CardTitle, CardContent } from '@/components/ui'
+import { Button, Card, CardHeader, CardTitle, CardContent } from '@/components/ui'
 import type { ThemeMode, ThemeColor } from '@/stores/theme'
 
 const themeStore = useThemeStore()
-const customColor = ref('#3b82f6')
 
 const availableColors = [
   { name: '蓝色', value: 'blue' as ThemeColor },

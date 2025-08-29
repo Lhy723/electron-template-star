@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import router from '@/router'
 
 export interface UserInfo {
@@ -248,7 +248,7 @@ const mockGetUserInfo = async (token: string): Promise<ApiResponse<UserInfo>> =>
   }
 }
 
-const mockLogout = async (token: string): Promise<ApiResponse> => {
+const mockLogout = async (_token: string): Promise<void> => {
   // 模拟网络延迟
   await new Promise(resolve => setTimeout(resolve, 300))
   

@@ -1,10 +1,10 @@
-import { app, BrowserWindow, Menu, shell, ipcMain } from 'electron'
-import { createRequire } from 'node:module'
+import { app, BrowserWindow, shell, ipcMain } from 'electron'
+// import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import os from 'node:os'
 
-const require = createRequire(import.meta.url)
+// const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // The built directory structure
@@ -128,91 +128,92 @@ ipcMain.handle('open-win', (_, arg) => {
 })
 
 // Auto-updater
-function update(win: BrowserWindow) {
+function update(_win: BrowserWindow) {
   // Auto-updater logic can be implemented here
   // For now, we'll just log that the app is ready for updates
   console.log('App is ready for updates')
 }
 
 // Create application menu
-function createMenu() {
-  const template: Electron.MenuItemConstructorOptions[] = [
-    {
-      label: 'File',
-      submenu: [
-        {
-          label: 'New',
-          accelerator: 'CmdOrCtrl+N',
-          click: () => {
-            // Handle new file
-          }
-        },
-        {
-          label: 'Open',
-          accelerator: 'CmdOrCtrl+O',
-          click: () => {
-            // Handle open file
-          }
-        },
-        { type: 'separator' },
-        {
-          label: 'Exit',
-          accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Ctrl+Q',
-          click: () => {
-            app.quit()
-          }
-        }
-      ]
-    },
-    {
-      label: 'Edit',
-      submenu: [
-        { role: 'undo' },
-        { role: 'redo' },
-        { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' }
-      ]
-    },
-    {
-      label: 'View',
-      submenu: [
-        { role: 'reload' },
-        { role: 'forceReload' },
-        { role: 'toggleDevTools' },
-        { type: 'separator' },
-        { role: 'resetZoom' },
-        { role: 'zoomIn' },
-        { role: 'zoomOut' },
-        { type: 'separator' },
-        { role: 'togglefullscreen' }
-      ]
-    },
-    {
-      label: 'Window',
-      submenu: [
-        { role: 'minimize' },
-        { role: 'close' }
-      ]
-    },
-    {
-      label: 'Help',
-      submenu: [
-        {
-          label: 'About',
-          click: () => {
-            // Handle about dialog
-          }
-        }
-      ]
-    }
-  ]
+// function createMenu() {
+//   const template: Electron.MenuItemConstructorOptions[] = [
+//     {
+//       label: 'File',
+//       submenu: [
+//         {
+//           label: 'New',
+//           accelerator: 'CmdOrCtrl+N',
+//           click: () => {
+//             // Handle new file
+//           }
+//         },
+//         {
+//           label: 'Open',
+//           accelerator: 'CmdOrCtrl+O',
+//           click: () => {
+//             // Handle open file
+//           }
+//         },
+//         { type: 'separator' },
+//         {
+//           label: 'Exit',
+//           accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Ctrl+Q',
+//           click: () => {
+//             app.quit()
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       label: 'Edit',
+//       submenu: [
+//         { role: 'undo' },
+//         { role: 'redo' },
+//         { type: 'separator' },
+//         { role: 'cut' },
+//         { role: 'copy' },
+//         { role: 'paste' }
+//       ]
+//     },
+//     {
+//       label: 'View',
+//       submenu: [
+//         { role: 'reload' },
+//         { role: 'forceReload' },
+//         { role: 'toggleDevTools' },
+//         { type: 'separator' },
+//         { role: 'resetZoom' },
+//         { role: 'zoomIn' },
+//         { role: 'zoomOut' },
+//         { type: 'separator' },
+//         { role: 'togglefullscreen' }
+//       ]
+//     },
+//     {
+//       label: 'Window',
+//       submenu: [
+//         { role: 'minimize' },
+//         { role: 'close' }
+//       ]
+//     },
+//     {
+//       label: 'Help',
+//       submenu: [
+//         {
+//           label: 'About',
+//           click: () => {
+//             // Handle about dialog
+//           }
+//         }
+//       ]
+//     }
+//   ]
+//
+//   const menu = Menu.buildFromTemplate(template)
+//   Menu.setApplicationMenu(menu)
+// }
 
-  const menu = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menu)
-}
-
-app.whenReady().then(() => {
-  createMenu()
-})
+// Remove duplicate app.whenReady() call
+// app.whenReady().then(() => {
+//   createMenu()
+// })
