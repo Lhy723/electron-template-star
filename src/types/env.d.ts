@@ -218,3 +218,27 @@ declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string | undefined
 declare const MAIN_WINDOW_VITE_NAME: string
 declare const PRELOAD_VITE_DEV_SERVER_URL: string | undefined
 declare const PRELOAD_VITE_NAME: string
+
+// Electron API类型定义
+interface ElectronAPI {
+  ipcRenderer: {
+    on: (channel: string, listener: (event: any, ...args: any[]) => void) => void
+    off: (channel: string, ...args: any[]) => void
+    send: (channel: string, ...args: any[]) => void
+    invoke: (channel: string, ...args: any[]) => Promise<any>
+  }
+  windowControls: {
+    minimize: () => Promise<void>
+    maximize: () => Promise<void>
+    unmaximize: () => Promise<void>
+    close: () => Promise<void>
+    isMaximized: () => Promise<boolean>
+  }
+}
+
+declare global {
+  interface Window {
+    ipcRenderer: ElectronAPI['ipcRenderer']
+    windowControls: ElectronAPI['windowControls']
+  }
+}

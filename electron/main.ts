@@ -23,6 +23,11 @@ process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
   ? path.join(process.env.DIST_ELECTRON, '../public')
   : process.env.DIST
 
+// 在开发模式下设置 VITE_DEV_SERVER_URL
+if (!process.env.VITE_DEV_SERVER_URL && process.env.NODE_ENV !== 'production') {
+  process.env.VITE_DEV_SERVER_URL = 'http://localhost:5173'
+}
+
 // Disable GPU Acceleration for Windows 7
 if (os.release().startsWith('6.1')) app.disableHardwareAcceleration()
 
@@ -41,7 +46,7 @@ if (!app.requestSingleInstanceLock()) {
 
 let win: BrowserWindow | null = null
 // Here, you can also use other preload
-const preload = path.join(__dirname, '../preload/index.js')
+const preload = path.join(__dirname, 'preload.js')
 const url = process.env.VITE_DEV_SERVER_URL
 const indexHtml = path.join(process.env.DIST, 'index.html')
 
@@ -53,22 +58,30 @@ async function createWindow() {
     height: 800,
     minWidth: 800,
     minHeight: 600,
+    frame: false, // 移除原生标题栏
+    titleBarStyle: 'hidden', // 隐藏标题栏但保留窗口控制按钮功能
     webPreferences: {
       preload,
       // Warning: Enabling nodeIntegration and disabling contextIsolation is not secure in production
       // Consider using contextBridge.exposeInMainWorld
       // Read more on https://www.electronjs.org/docs/latest/tutorial/context-isolation
-      nodeIntegration: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      contextIsolation: true,
+      enableRemoteModule: false,
+      webSecurity: true,
     },
   })
 
   if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
     // 确保 url 不为 undefined 后再加载
-    if (url) win.loadURL(url)
-    // Open devTool if the app is not packaged
-    win.webContents.openDevTools()
+    console.log('Loading development server:', url)
+    if (url) {
+      win.loadURL(url)
+      // Open devTool if the app is not packaged
+      win.webContents.openDevTools()
+    }
   } else {
+    console.log('Loading file:', indexHtml)
     win.loadFile(indexHtml)
   }
 
@@ -86,6 +99,33 @@ async function createWindow() {
   // Apply electron-updater
   update(win)
 }
+
+// --------- Window Controls IPC Handlers ---------
+ipcMain.handle('window-minimize', () => {
+  if (win) win.minimize()
+})
+
+ipcMain.handle('window-maximize', () => {
+  if (win) {
+    if (win.isMaximized()) {
+      win.unmaximize()
+    } else {
+      win.maximize()
+    }
+  }
+})
+
+ipcMain.handle('window-unmaximize', () => {
+  if (win) win.unmaximize()
+})
+
+ipcMain.handle('window-close', () => {
+  if (win) win.close()
+})
+
+ipcMain.handle('window-is-maximized', () => {
+  return win ? win.isMaximized() : false
+})
 
 app.whenReady().then(createWindow)
 
@@ -116,8 +156,10 @@ ipcMain.handle('open-win', (_, arg) => {
   const childWindow = new BrowserWindow({
     webPreferences: {
       preload,
-      nodeIntegration: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      contextIsolation: true,
+      enableRemoteModule: false,
+      webSecurity: true,
     },
   })
 

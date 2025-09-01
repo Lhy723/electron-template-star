@@ -77,6 +77,9 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
+
+          <!-- 窗口控制按钮 -->
+          <WindowControls />
         </div>
       </header>
 
@@ -123,6 +126,7 @@ import { Menu, Grid, Odometer, Brush } from '@element-plus/icons-vue'
 import { useThemeStore } from '@/stores/theme'
 import { useUserStore } from '@/stores/user'
 import ThemeToggle from '@/components/theme-toggle.vue'
+import WindowControls from '@/components/window-controls.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -269,6 +273,8 @@ const handleLogout = () => {
   justify-content: space-between;
   padding: 0 16px;
   flex-shrink: 0;
+  -webkit-app-region: drag; /* 使整个header可拖拽 */
+  user-select: none; /* 防止文本选择 */
 }
 
 .app-header.fixed {
@@ -287,12 +293,14 @@ const handleLogout = () => {
   display: flex;
   align-items: center;
   gap: 16px;
+  -webkit-app-region: no-drag; /* 确保左侧按钮可以点击 */
 }
 
 .header-right {
   display: flex;
   align-items: center;
   gap: 16px;
+  -webkit-app-region: no-drag; /* 确保右侧按钮可以点击 */
 }
 
 .breadcrumb {

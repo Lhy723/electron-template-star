@@ -12,6 +12,11 @@ export default defineConfig({
       {
         // Main-Process entry file of the Electron App.
         entry: 'electron/main.ts',
+        vite: {
+          build: {
+            outDir: 'dist-electron',
+          },
+        },
       },
       {
         entry: 'electron/preload.ts',
@@ -20,10 +25,19 @@ export default defineConfig({
           // instead of restarting the entire Electron App.
           options.reload()
         },
+        vite: {
+          build: {
+            outDir: 'dist-electron',
+          },
+        },
       },
     ]),
     renderer(),
   ],
+  define: {
+    __VUE_OPTIONS_API__: true,
+    __VUE_PROD_DEVTOOLS__: false,
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

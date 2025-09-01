@@ -23,6 +23,15 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
   // ...
 })
 
+// --------- Window Controls API ---------
+contextBridge.exposeInMainWorld('windowControls', {
+  minimize: () => ipcRenderer.invoke('window-minimize'),
+  maximize: () => ipcRenderer.invoke('window-maximize'),
+  unmaximize: () => ipcRenderer.invoke('window-unmaximize'),
+  close: () => ipcRenderer.invoke('window-close'),
+  isMaximized: () => ipcRenderer.invoke('window-is-maximized'),
+})
+
 // --------- Preload scripts loading ---------
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
   return new Promise(resolve => {
