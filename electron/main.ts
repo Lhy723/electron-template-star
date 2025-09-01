@@ -18,7 +18,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // │ └── index.html    > Electron-Renderer
 //
 process.env.DIST_ELECTRON = path.join(__dirname, '../')
-process.env.DIST = path.join(process.env.DIST_ELECTRON, '../dist')
+process.env.DIST = app.isPackaged 
+  ? path.join(process.env.DIST_ELECTRON, 'dist')  // 打包后的路径
+  : path.join(process.env.DIST_ELECTRON, '../dist')  // 开发环境路径
 process.env.VITE_PUBLIC = process.env.VITE_DEV_SERVER_URL
   ? path.join(process.env.DIST_ELECTRON, '../public')
   : process.env.DIST
@@ -72,17 +74,33 @@ async function createWindow() {
     },
   })
 
-  if (process.env.VITE_DEV_SERVER_URL) { // electron-vite-vue#298
-    // 确保 url 不为 undefined 后再加载
+  // 更严格的环境判断
+  const isDevelopment = process.env.NODE_ENV !== 'production'
+  const isPackaged = app.isPackaged
+
+  if (process.env.VITE_DEV_SERVER_URL && isDevelopment && !isPackaged) {
+    // 开发环境逻辑
     console.log('Loading development server:', url)
     if (url) {
       win.loadURL(url)
-      // Open devTool if the app is not packaged
+      // 仅在开发模式下开启开发者工具
       win.webContents.openDevTools()
     }
   } else {
+    // 生产环境逻辑
     console.log('Loading file:', indexHtml)
-    win.loadFile(indexHtml)
+    
+    // 检查文件是否存在
+    const fs = require('fs')
+    if (fs.existsSync(indexHtml)) {
+      win.loadFile(indexHtml)
+    } else {
+      console.error('Index.html file not found:', indexHtml)
+      console.error('Expected path:', indexHtml)
+      console.error('DIST path:', process.env.DIST)
+      // 显示错误信息
+      win.loadURL(`data:text/html;charset=utf-8,<html><body><h1>Error: Could not load application</h1><p>File not found: ${indexHtml}</p></body></html>`)
+    }
   }
 
   // Test actively push message to the Electron-Renderer

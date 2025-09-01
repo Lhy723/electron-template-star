@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build && electron-builder",
-    "build:web": "vue-tsc --noEmit && vite build",
-    "build:electron": "electron-builder",
+    "build:web": "vite build",
+    "build:electron": "npm run build:web && cross-env NODE_ENV=production electron-builder",
     "preview": "vite preview",
     "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 --delay 1000 && cross-env NODE_ENV=development electron .\"",
     "electron:build": "npm run build:web && electron-builder",
