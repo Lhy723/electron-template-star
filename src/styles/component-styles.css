@@ -1,0 +1,892 @@
+/* 组件风格样式系统 */
+
+/* 引入 iOS 风格样式 */
+@import './ios-glass-effects.css';
+@import './ios-interactions.css';
+
+/* 基础组件样式变量 */
+:root {
+  --component-border-radius: var(--modern-radius-md);
+  --component-border-width: 1px;
+  --component-shadow: var(--modern-shadow-sm);
+  --component-padding: var(--modern-spacing-md);
+  --component-font-weight: 500;
+}
+
+/* 现代风格 */
+.component-style-modern {
+  /* 现代风格已在默认值中定义 */
+}
+
+.component-style-modern .modern-button,
+.component-style-modern .modern-card,
+.component-style-modern .modern-input__wrapper {
+  border-radius: var(--component-border-radius);
+  border-width: var(--component-border-width);
+  box-shadow: var(--component-shadow);
+  padding: var(--component-padding);
+  font-weight: var(--component-font-weight);
+}
+
+/* 现代风格 iOS 增强 */
+.component-style-modern.glass-medium .modern-button,
+.component-style-modern.glass-medium .modern-card {
+  @apply ios-glass-card ios-interactive;
+  transition: all var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+.component-style-modern.glass-heavy .modern-button,
+.component-style-modern.glass-heavy .modern-card {
+  @apply ios-glass-heavy ios-interactive;
+}
+
+.component-style-modern.glass-ultra .modern-button,
+.component-style-modern.glass-ultra .modern-card {
+  @apply ios-glass-ultra ios-interactive;
+}
+
+.component-style-modern.interaction-enhanced .modern-button {
+  @apply ios-spring ios-ripple;
+}
+
+.component-style-modern.interaction-enhanced .modern-card {
+  @apply ios-card-hover;
+}
+
+.component-style-modern .modern-button:active {
+  @apply ios-button-press;
+}
+
+/* ShadcnUI 组件支持 */
+.component-style-modern .card,
+.component-style-modern [role="button"],
+.component-style-modern button {
+  transition: all var(--ios-duration-medium) var(--ios-ease-in-out);
+}
+
+.component-style-modern.glass-medium .card {
+  @apply ios-glass-card;
+}
+
+.component-style-modern.interaction-enhanced .card:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: var(--ios-glass-shadow-medium);
+}
+
+.component-style-modern.interaction-enhanced button:active,
+.component-style-modern.interaction-enhanced [role="button"]:active {
+  transform: scale(0.96);
+}
+
+/* 经典风格 */
+.component-style-classic .modern-button,
+.component-style-classic .modern-card,
+.component-style-classic .modern-input__wrapper {
+  border-radius: var(--modern-radius-xs);
+  border-width: 1px;
+  box-shadow: none;
+  font-weight: 400;
+  background: var(--modern-background-tertiary);
+  border: 1px solid var(--modern-divider);
+}
+
+.component-style-classic .modern-button {
+  background: var(--modern-background-secondary);
+  border: 1px solid var(--modern-divider);
+  color: var(--modern-text-primary);
+}
+
+.component-style-classic .modern-button--primary {
+  background: var(--modern-primary-blue);
+  color: white;
+  border-color: var(--modern-primary-blue);
+}
+
+.component-style-classic .modern-button:hover {
+  background: var(--modern-fill-quaternary);
+  transform: none;
+}
+
+.component-style-classic .modern-button--primary:hover {
+  background: #0056d3;
+  transform: none;
+}
+
+/* 经典风格 iOS 增强 */
+.component-style-classic.glass-light .modern-card {
+  @apply ios-glass-light;
+  backdrop-filter: blur(var(--ios-blur-light));
+  -webkit-backdrop-filter: blur(var(--ios-blur-light));
+}
+
+.component-style-classic.interaction-minimal .modern-button:hover {
+  background: var(--modern-fill-tertiary);
+  transition: background var(--ios-duration-fast) var(--ios-ease-out);
+}
+
+.component-style-classic.interaction-standard .modern-button:active {
+  transform: scale(0.98);
+  transition: transform var(--ios-duration-fast) var(--ios-ease-out);
+}
+
+/* ShadcnUI 支持 */
+.component-style-classic .card {
+  border-radius: var(--modern-radius-xs);
+  border: 1px solid var(--modern-divider);
+  box-shadow: none;
+}
+
+.component-style-classic.glass-light .card {
+  @apply ios-glass-light;
+}
+
+.component-style-classic.interaction-standard button:hover {
+  background: var(--modern-fill-quaternary);
+  transition: background var(--ios-duration-fast) var(--ios-ease-out);
+}
+
+/* 简约风格 */
+.component-style-minimal .modern-button,
+.component-style-minimal .modern-card,
+.component-style-minimal .modern-input__wrapper {
+  border-radius: var(--modern-radius-none);
+  border-width: 1px;
+  box-shadow: none;
+  font-weight: 300;
+  background: transparent;
+}
+
+.component-style-minimal .modern-button {
+  border: 1px solid var(--modern-divider);
+  background: transparent;
+  color: var(--modern-text-primary);
+  padding: var(--modern-spacing-sm) var(--modern-spacing-md);
+}
+
+.component-style-minimal .modern-button--primary {
+  border-color: var(--modern-primary-blue);
+  color: var(--modern-primary-blue);
+  background: transparent;
+}
+
+.component-style-minimal .modern-button--primary:hover {
+  background: var(--modern-primary-blue);
+  color: white;
+  transform: none;
+}
+
+.component-style-minimal .modern-card {
+  border: 1px solid var(--modern-divider);
+  background: var(--modern-background-primary);
+}
+
+.component-style-minimal .modern-input__wrapper {
+  border: none;
+  border-bottom: 1px solid var(--modern-divider);
+  background: transparent;
+}
+
+/* 简约风格 iOS 增强 */
+.component-style-minimal.interaction-minimal .modern-button:hover {
+  border-color: var(--modern-text-primary);
+  transition: border-color var(--ios-duration-fast) var(--ios-ease-out);
+}
+
+.component-style-minimal.interaction-standard .modern-button:active {
+  transform: scale(0.99);
+  transition: transform var(--ios-duration-fast) var(--ios-ease-out);
+}
+
+.component-style-minimal.glass-light .modern-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.dark .component-style-minimal.glass-light .modern-card {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* ShadcnUI 支持 */
+.component-style-minimal .card {
+  border: 1px solid var(--modern-divider);
+  background: var(--modern-background-primary);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.component-style-minimal button {
+  border: 1px solid var(--modern-divider);
+  background: transparent;
+  border-radius: 0;
+}
+
+.component-style-minimal.interaction-minimal button:hover {
+  border-color: var(--modern-text-primary);
+  transition: border-color var(--ios-duration-fast) var(--ios-ease-out);
+}
+
+/* 圆润风格 */
+.component-style-rounded .modern-button,
+.component-style-rounded .modern-card,
+.component-style-rounded .modern-input__wrapper {
+  border-radius: var(--modern-radius-xl);
+  border-width: 0px;
+  box-shadow: var(--modern-shadow-md);
+  font-weight: 500;
+  padding: var(--modern-spacing-lg);
+}
+
+.component-style-rounded .modern-button {
+  border-radius: var(--modern-radius-full);
+  padding: var(--modern-spacing-md) var(--modern-spacing-xl);
+  box-shadow: var(--modern-shadow-sm);
+}
+
+.component-style-rounded .modern-button:hover {
+  box-shadow: var(--modern-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.component-style-rounded .modern-card {
+  border-radius: var(--modern-radius-2xl);
+  box-shadow: var(--modern-shadow-lg);
+}
+
+.component-style-rounded .modern-card:hover {
+  box-shadow: var(--modern-shadow-xl);
+  transform: translateY(-4px);
+}
+
+.component-style-rounded .modern-input__wrapper {
+  border-radius: var(--modern-radius-xl);
+  border: none;
+  box-shadow: var(--modern-shadow-sm);
+}
+
+/* 圆润风格 iOS 增强 */
+.component-style-rounded.glass-heavy .modern-button {
+  @apply ios-glass-button ios-spring;
+  backdrop-filter: blur(var(--ios-blur-heavy));
+  -webkit-backdrop-filter: blur(var(--ios-blur-heavy));
+}
+
+.component-style-rounded.glass-heavy .modern-card {
+  @apply ios-glass-heavy ios-float;
+  animation-duration: 4s;
+}
+
+.component-style-rounded.glass-ultra .modern-card {
+  @apply ios-glass-ultra ios-breathe;
+}
+
+.component-style-rounded.interaction-enhanced .modern-button {
+  @apply ios-spring;
+  transition: all var(--ios-duration-medium) var(--ios-ease-bounce);
+}
+
+.component-style-rounded.interaction-enhanced .modern-button:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.component-style-rounded.interaction-enhanced .modern-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.component-style-rounded.enable-parallax .modern-card {
+  transform-style: preserve-3d;
+  transition: transform var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+/* ShadcnUI 支持 */
+.component-style-rounded .card {
+  border-radius: var(--modern-radius-2xl);
+  box-shadow: var(--modern-shadow-lg);
+  border: none;
+}
+
+.component-style-rounded button {
+  border-radius: var(--modern-radius-full);
+  border: none;
+  box-shadow: var(--modern-shadow-sm);
+}
+
+.component-style-rounded.glass-heavy .card {
+  @apply ios-glass-heavy;
+}
+
+.component-style-rounded.interaction-enhanced .card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: all var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+.component-style-rounded.interaction-enhanced button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  transition: all var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+/* 锐利风格 */
+.component-style-sharp .modern-button,
+.component-style-sharp .modern-card,
+.component-style-sharp .modern-input__wrapper {
+  border-radius: var(--modern-radius-none);
+  border-width: 2px;
+  box-shadow: none;
+  font-weight: 600;
+}
+
+.component-style-sharp .modern-button {
+  border: 2px solid var(--modern-primary-blue);
+  background: transparent;
+  color: var(--modern-primary-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.component-style-sharp .modern-button--primary {
+  background: var(--modern-primary-blue);
+  color: white;
+}
+
+.component-style-sharp .modern-button:hover {
+  background: var(--modern-primary-blue);
+  color: white;
+  transform: none;
+}
+
+.component-style-sharp .modern-button--primary:hover {
+  background: #0056d3;
+  border-color: #0056d3;
+  transform: none;
+}
+
+.component-style-sharp .modern-card {
+  border: 2px solid var(--modern-divider);
+  background: var(--modern-background-primary);
+}
+
+.component-style-sharp .modern-input__wrapper {
+  border: 2px solid var(--modern-divider);
+  background: var(--modern-background-primary);
+}
+
+.component-style-sharp .modern-input__wrapper:focus-within {
+  border-color: var(--modern-primary-blue);
+  box-shadow: none;
+}
+
+/* 锐利风格 iOS 增强 */
+.component-style-sharp.interaction-enhanced .modern-button {
+  transition: all var(--ios-duration-fast) var(--ios-ease-sharp);
+  position: relative;
+  overflow: hidden;
+}
+
+.component-style-sharp.interaction-enhanced .modern-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left var(--ios-duration-medium) var(--ios-ease-out);
+}
+
+.component-style-sharp.interaction-enhanced .modern-button:hover::before {
+  left: 100%;
+}
+
+.component-style-sharp.interaction-enhanced .modern-button:active {
+  transform: scale(0.98);
+  border-width: 3px;
+}
+
+.component-style-sharp.interaction-enhanced .modern-card:hover {
+  border-color: var(--modern-primary-blue);
+  transition: border-color var(--ios-duration-fast) var(--ios-ease-sharp);
+}
+
+.component-style-sharp.glass-light .modern-card {
+  border-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.dark .component-style-sharp.glass-light .modern-card {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ShadcnUI 支持 */
+.component-style-sharp .card {
+  border: 2px solid var(--modern-divider);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.component-style-sharp button {
+  border: 2px solid var(--modern-primary-blue);
+  border-radius: 0;
+  background: transparent;
+  color: var(--modern-primary-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.component-style-sharp.interaction-enhanced .card:hover {
+  border-color: var(--modern-primary-blue);
+  transition: border-color var(--ios-duration-fast) var(--ios-ease-sharp);
+}
+
+.component-style-sharp.interaction-enhanced button:hover {
+  background: var(--modern-primary-blue);
+  color: white;
+  transition: all var(--ios-duration-fast) var(--ios-ease-sharp);
+}
+
+.component-style-sharp.interaction-enhanced button:active {
+  transform: scale(0.98);
+  border-width: 3px;
+}
+
+/* 通用 iOS 增强效果 */
+
+/* 毛玻璃全局控制 */
+.no-blur .ios-glass,
+.no-blur .ios-glass-light,
+.no-blur .ios-glass-medium,
+.no-blur .ios-glass-heavy,
+.no-blur .ios-glass-ultra,
+.no-blur .ios-glass-card,
+.no-blur .ios-glass-button {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--modern-background-secondary) !important;
+  border: 1px solid var(--modern-divider) !important;
+}
+
+/* 交互反馈级别控制 */
+.interaction-none .ios-interactive,
+.interaction-none .ios-spring,
+.interaction-none .ios-card-hover,
+.interaction-none .ios-button-press {
+  transition: none !important;
+  transform: none !important;
+}
+
+.interaction-none .ios-interactive:hover,
+.interaction-none .ios-spring:hover,
+.interaction-none .ios-card-hover:hover {
+  transform: none !important;
+}
+
+.interaction-minimal .ios-interactive,
+.interaction-minimal .ios-spring {
+  transition: opacity var(--ios-duration-fast) var(--ios-ease-out);
+}
+
+.interaction-minimal .ios-interactive:hover {
+  opacity: 0.8;
+  transform: none;
+}
+
+.interaction-enhanced .ios-interactive {
+  transition: all var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+.interaction-enhanced .ios-interactive:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* 动效禁用 */
+.no-spring .ios-spring {
+  transition: all var(--ios-duration-fast) var(--ios-ease-in-out) !important;
+}
+
+.no-ripple .ios-ripple::before {
+  display: none !important;
+}
+
+.no-backdrop .ios-glass,
+.no-backdrop .ios-glass-card,
+.no-backdrop .ios-glass-button {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* 渐变背景控制 */
+.no-gradients .modern-card,
+.no-gradients .card {
+  background: var(--modern-background-primary) !important;
+}
+
+.enable-gradients .modern-card,
+.enable-gradients .card {
+  background: linear-gradient(135deg, 
+    var(--modern-background-primary) 0%, 
+    var(--modern-background-secondary) 100%);
+}
+
+/* 视差效果 */
+.enable-parallax .modern-card,
+.enable-parallax .card {
+  transform-style: preserve-3d;
+  transition: transform var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+.enable-parallax .modern-card:hover,
+.enable-parallax .card:hover {
+  transform: perspective(1000px) rotateX(5deg) translateY(-10px);
+}
+
+/* 高对比度模式适配 */
+.high-contrast .ios-glass,
+.high-contrast .ios-glass-card,
+.high-contrast .ios-glass-button {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--modern-background-primary) !important;
+  border: 2px solid var(--modern-text-primary) !important;
+}
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+  .ios-interactive,
+  .ios-spring,
+  .ios-card-hover,
+  .ios-button-press,
+  .modern-card,
+  .card,
+  button {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .ios-interactive:hover,
+  .ios-spring:hover,
+  .ios-card-hover:hover {
+    transform: none !important;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .ios-interactive:hover,
+  .ios-card-hover:hover {
+    transform: none;
+  }
+  
+  .ios-interactive:active,
+  .ios-card-hover:active {
+    transform: scale(0.98);
+    transition: transform var(--ios-duration-instant) var(--ios-ease-out);
+  }
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .ios-glass,
+  .ios-glass-card {
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  
+  .ios-card-hover:hover {
+    transform: translateY(-2px) scale(1.01) !important;
+  }
+  
+  .interaction-enhanced .ios-interactive:hover {
+    transform: translateY(-1px) scale(1.01) !important;
+  }
+}
+@media (max-width: 768px) {
+  .component-style-rounded .modern-button {
+    padding: var(--modern-spacing-sm) var(--modern-spacing-lg);
+  }
+  
+  .component-style-rounded .modern-card,
+  .component-style-rounded .modern-input__wrapper {
+    padding: var(--modern-spacing-md);
+  }
+}
+
+/* ShadcnUI 组件风格支持 */
+
+/* 现代风格 - ShadcnUI */
+.component-style-modern button,
+.component-style-modern [role="button"] {
+  border-radius: calc(var(--radius) * 1px);
+  transition: all 0.2s ease;
+}
+
+/* 经典风格 - ShadcnUI */
+.component-style-classic button:not(.modern-button),
+.component-style-classic [role="button"]:not(.modern-button),
+.component-style-classic .rounded-md:not(.modern-card) {
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+}
+
+.component-style-classic .bg-primary {
+  background: hsl(var(--primary)) !important;
+}
+
+.component-style-classic .bg-secondary {
+  background: hsl(var(--muted)) !important;
+  border: 1px solid hsl(var(--border));
+}
+
+.component-style-classic .border {
+  border-width: 1px !important;
+}
+
+/* 简约风格 - ShadcnUI */
+.component-style-minimal button:not(.modern-button),
+.component-style-minimal [role="button"]:not(.modern-button),
+.component-style-minimal .rounded-md:not(.modern-card),
+.component-style-minimal .rounded-lg:not(.modern-card) {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-weight: 300 !important;
+}
+
+.component-style-minimal .bg-primary {
+  background: transparent !important;
+  color: hsl(var(--primary)) !important;
+  border: 1px solid hsl(var(--primary)) !important;
+}
+
+.component-style-minimal .bg-primary:hover {
+  background: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.component-style-minimal .bg-secondary {
+  background: transparent !important;
+  border: 1px solid hsl(var(--border)) !important;
+}
+
+.component-style-minimal .border:not(.modern-card):not(.modern-input__wrapper) {
+  border-bottom: 1px solid hsl(var(--border)) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+/* 圆润风格 - ShadcnUI */
+.component-style-rounded button:not(.modern-button),
+.component-style-rounded [role="button"]:not(.modern-button),
+.component-style-rounded .rounded-md:not(.modern-card),
+.component-style-rounded .rounded-lg:not(.modern-card) {
+  border-radius: 24px !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+  transition: all 0.2s ease;
+  font-weight: 500 !important;
+}
+
+.component-style-rounded button:not(.modern-button):hover,
+.component-style-rounded [role="button"]:not(.modern-button):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+}
+
+.component-style-rounded .rounded-xl:not(.modern-card) {
+  border-radius: 32px !important;
+}
+
+/* 锐利风格 - ShadcnUI */
+.component-style-sharp button:not(.modern-button),
+.component-style-sharp [role="button"]:not(.modern-button),
+.component-style-sharp .rounded-md:not(.modern-card),
+.component-style-sharp .rounded-lg:not(.modern-card),
+.component-style-sharp .rounded-xl:not(.modern-card) {
+  border-radius: 0 !important;
+  border-width: 2px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.component-style-sharp .bg-primary {
+  background: transparent !important;
+  color: hsl(var(--primary)) !important;
+  border: 2px solid hsl(var(--primary)) !important;
+}
+
+.component-style-sharp .bg-primary:hover {
+  background: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}
+
+.component-style-sharp .border:not(.modern-card):not(.modern-input__wrapper) {
+  border-width: 2px !important;
+}
+
+/* Element Plus 组件风格支持 */
+
+/* 经典风格 - Element Plus */
+.component-style-classic .el-button {
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+
+.component-style-classic .el-card {
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  border: 1px solid var(--el-border-color) !important;
+}
+
+.component-style-classic .el-input__wrapper {
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+
+/* 简约风格 - Element Plus */
+.component-style-minimal .el-button {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-weight: 300 !important;
+}
+
+.component-style-minimal .el-card {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 1px solid var(--el-border-color) !important;
+}
+
+.component-style-minimal .el-input__wrapper {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: 1px solid var(--el-border-color) !important;
+}
+
+/* 圆润风格 - Element Plus */
+.component-style-rounded .el-button {
+  border-radius: 24px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.component-style-rounded .el-card {
+  border-radius: 16px !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+}
+
+.component-style-rounded .el-input__wrapper {
+  border-radius: 20px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+/* 锐利风格 - Element Plus */
+.component-style-sharp .el-button {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border-width: 2px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.component-style-sharp .el-card {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 2px solid var(--el-border-color) !important;
+}
+
+.component-style-sharp .el-input__wrapper {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 2px solid var(--el-border-color) !important;
+}
+
+/* 高对比度模式调整 */
+@media (prefers-contrast: high) {
+  .component-style-minimal .modern-button,
+  .component-style-classic .modern-button {
+    border-width: 2px;
+  }
+  
+  .component-style-rounded .modern-button,
+  .component-style-rounded .modern-card {
+    border: 1px solid var(--modern-text-primary);
+  }
+}
+
+/* 减少动画偏好调整 */
+@media (prefers-reduced-motion: reduce) {
+  .component-style-rounded .modern-button:hover,
+  .component-style-rounded .modern-card:hover {
+    transform: none;
+  }
+}
+
+/* 组件风格预览样式 */
+.component-style-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--modern-spacing-md);
+  padding: var(--modern-spacing-lg);
+  border: 1px solid var(--modern-divider);
+  border-radius: var(--modern-radius-md);
+  background: var(--modern-background-secondary);
+  min-height: 120px;
+  transition: all var(--modern-duration-fast) var(--modern-easing-ease);
+}
+
+.component-style-preview:hover {
+  border-color: var(--modern-primary-blue);
+  background: var(--modern-background-tertiary);
+}
+
+.component-style-preview--active {
+  border-color: var(--modern-primary-blue);
+  background: var(--modern-background-tertiary);
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+}
+
+.component-style-preview__title {
+  font-size: var(--modern-font-size-headline);
+  font-weight: 600;
+  color: var(--modern-text-primary);
+  margin: 0;
+}
+
+.component-style-preview__description {
+  font-size: var(--modern-font-size-footnote);
+  color: var(--modern-text-secondary);
+  margin: 0;
+}
+
+.component-style-preview__sample {
+  display: flex;
+  gap: var(--modern-spacing-sm);
+  align-items: center;
+  margin-top: auto;
+}
+
+.component-style-preview__button {
+  padding: var(--modern-spacing-xs) var(--modern-spacing-sm);
+  border-radius: var(--component-border-radius);
+  border: var(--component-border-width) solid var(--modern-primary-blue);
+  background: var(--modern-primary-blue);
+  color: white;
+  font-size: var(--modern-font-size-caption-1);
+  font-weight: var(--component-font-weight);
+  box-shadow: var(--component-shadow);
+}
+
+.component-style-preview__card {
+  width: 40px;
+  height: 24px;
+  border-radius: var(--component-border-radius);
+  border: var(--component-border-width) solid var(--modern-divider);
+  background: var(--modern-background-tertiary);
+  box-shadow: var(--component-shadow);
+}

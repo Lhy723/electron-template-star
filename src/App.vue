@@ -1,15 +1,11 @@
 <template>
   <div
     id="app"
-    class="h-screen overflow-hidden"
+    class="modern-app h-screen overflow-hidden"
     :class="[
-      themeStore.isDark ? 'dark' : '',
-      `theme-${themeStore.config.color}`,
+      modernThemeStore.themeClasses,
       {
-        compact: themeStore.config.compact,
-        'fixed-header': themeStore.config.fixedHeader,
-        'fixed-sidebar': themeStore.config.fixedSidebar,
-        'sidebar-collapsed': themeStore.config.sidebarCollapsed,
+        'sidebar-collapsed': sidebarCollapsed,
       },
     ]"
   >
@@ -18,9 +14,16 @@
 </template>
 
 <script setup lang="ts">
-import { useThemeStore } from '@/stores/theme'
+import { onMounted, ref } from 'vue'
+import { useModernThemeStore } from '@/stores/modern-theme'
 
-const themeStore = useThemeStore()
+const modernThemeStore = useModernThemeStore()
+const sidebarCollapsed = ref(false)
+
+// 初始化现代主题系统
+onMounted(() => {
+  modernThemeStore.initialize()
+})
 </script>
 
 <style>

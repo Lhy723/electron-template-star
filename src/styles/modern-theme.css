@@ -1,0 +1,434 @@
+/* 现代流畅设计令牌 CSS 变量 */
+
+/* 引入动画系统 */
+@import './modern-animations.css';
+
+/* 引入组件风格系统 */
+@import './component-styles.css';
+
+/* 引入 iOS 风格毛玻璃效果 */
+@import './ios-glass-effects.css';
+
+/* 引入 iOS 风格交互动效 */
+@import './ios-interactions.css';
+
+/* 浅色主题 - 全局定义 */
+:root {
+  /* 系统色彩 */
+  --modern-primary-blue: #007AFF;
+  --modern-primary-green: #34C759;
+  --modern-primary-indigo: #5856D6;
+  --modern-primary-orange: #FF9500;
+  --modern-primary-pink: #FF2D92;
+  --modern-primary-purple: #AF52DE;
+  --modern-primary-red: #FF3B30;
+  --modern-primary-teal: #5AC8FA;
+  --modern-primary-yellow: #FFCC00;
+
+  /* 灰度色彩 */
+  --modern-neutral-gray: #8E8E93;
+  --modern-neutral-gray-2: #AEAEB2;
+  --modern-neutral-gray-3: #C7C7CC;
+  --modern-neutral-gray-4: #D1D1D6;
+  --modern-neutral-gray-5: #E5E5EA;
+  --modern-neutral-gray-6: #F2F2F7;
+
+  /* 语义色彩 - 浅色模式 */
+  --modern-text-primary: #000000;
+  --modern-text-secondary: #3C3C43;
+  --modern-text-tertiary: rgba(60, 60, 67, 0.6);
+  --modern-text-quaternary: rgba(60, 60, 67, 0.18);
+  
+  /* 背景色彩 - 浅色模式 */
+  --modern-background-primary: #FFFFFF;
+  --modern-background-secondary: #F2F2F7;
+  --modern-background-tertiary: #FFFFFF;
+  
+  /* 分组背景 - 浅色模式 */
+  --modern-background-grouped: #F2F2F7;
+  --modern-background-grouped-secondary: #FFFFFF;
+  --modern-background-grouped-tertiary: #F2F2F7;
+  
+  /* 填充色彩 - 浅色模式 */
+  --modern-fill-primary: rgba(120, 120, 128, 0.2);
+  --modern-fill-secondary: rgba(120, 120, 128, 0.16);
+  --modern-fill-tertiary: rgba(118, 118, 128, 0.12);
+  --modern-fill-quaternary: rgba(116, 116, 128, 0.08);
+  
+  /* 分隔线 - 浅色模式 */
+  --modern-divider: rgba(60, 60, 67, 0.36);
+  --modern-divider-opaque: #C6C6C8;
+  --modern-fill-tertiary: rgba(118, 118, 128, 0.12);
+  --modern-fill-quaternary: rgba(116, 116, 128, 0.08);
+  
+  /* 分隔线 */
+  --modern-divider: rgba(60, 60, 67, 0.29);
+  --modern-divider-opaque: #C6C6C8;
+
+  /* 字体尺寸 */
+  --modern-font-size-large-title: 34px;
+  --modern-font-size-title-1: 28px;
+  --modern-font-size-title-2: 22px;
+  --modern-font-size-title-3: 20px;
+  --modern-font-size-headline: 17px;
+  --modern-font-size-body: 17px;
+  --modern-font-size-callout: 16px;
+  --modern-font-size-subheadline: 15px;
+  --modern-font-size-footnote: 13px;
+  --modern-font-size-caption-1: 12px;
+  --modern-font-size-caption-2: 11px;
+
+  /* 行高 */
+  --modern-line-height-large-title: 41px;
+  --modern-line-height-title-1: 34px;
+  --modern-line-height-title-2: 28px;
+  --modern-line-height-title-3: 25px;
+  --modern-line-height-headline: 22px;
+  --modern-line-height-body: 22px;
+  --modern-line-height-callout: 21px;
+  --modern-line-height-subheadline: 20px;
+  --modern-line-height-footnote: 18px;
+  --modern-line-height-caption-1: 16px;
+  --modern-line-height-caption-2: 13px;
+
+  /* 间距 */
+  --modern-spacing-xs: 4px;
+  --modern-spacing-sm: 8px;
+  --modern-spacing-md: 16px;
+  --modern-spacing-lg: 24px;
+  --modern-spacing-xl: 32px;
+  --modern-spacing-2xl: 40px;
+  --modern-spacing-3xl: 48px;
+  --modern-spacing-4xl: 64px;
+
+  /* 圆角 */
+  --modern-radius-none: 0px;
+  --modern-radius-xs: 4px;
+  --modern-radius-sm: 8px;
+  --modern-radius-md: 12px;
+  --modern-radius-lg: 16px;
+  --modern-radius-xl: 20px;
+  --modern-radius-2xl: 24px;
+  --modern-radius-full: 9999px;
+
+  /* 阴影 */
+  --modern-shadow-none: none;
+  --modern-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --modern-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --modern-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --modern-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --modern-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  /* 动画时长 */
+  --modern-duration-fast: 150ms;
+  --modern-duration-medium: 300ms;
+  --modern-duration-slow: 500ms;
+
+  /* 动画缓动 */
+  --modern-easing-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --modern-easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --modern-easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --modern-easing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --modern-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* 字体设置 - 默认值，由JavaScript动态更新 */
+  --app-font-family: system-ui, -apple-system, sans-serif;
+  --app-font-size: 16px;
+  --app-font-weight: 400;
+  
+  /* 背景设置 - 默认值，由JavaScript动态更新 */
+  --app-background-image: none;
+  --app-background-size: cover;
+  --app-background-position: center;
+  --app-background-opacity: 1;
+  --app-background-filter: none;
+}
+
+/* 深色主题 - 覆盖浅色主题变量 */
+.dark {
+  /* 系统色彩 - 深色版本 */
+  --modern-primary-blue: #0A84FF;
+  --modern-primary-green: #30D158;
+  --modern-primary-indigo: #5E5CE6;
+  --modern-primary-orange: #FF9F0A;
+  --modern-primary-pink: #FF375F;
+  --modern-primary-purple: #BF5AF2;
+  --modern-primary-red: #FF453A;
+  --modern-primary-teal: #64D2FF;
+  --modern-primary-yellow: #FFD60A;
+
+  /* 灰度色彩 - 深色版本 */
+  --modern-neutral-gray: #8E8E93;
+  --modern-neutral-gray-2: #636366;
+  --modern-neutral-gray-3: #48484A;
+  --modern-neutral-gray-4: #3A3A3C;
+  --modern-neutral-gray-5: #2C2C2E;
+  --modern-neutral-gray-6: #1C1C1E;
+
+  /* 语义色彩 - 深色模式 */
+  --modern-text-primary: #FFFFFF;
+  --modern-text-secondary: #EBEBF5;
+  --modern-text-tertiary: rgba(235, 235, 245, 0.6);
+  --modern-text-quaternary: rgba(235, 235, 245, 0.18);
+  
+  /* 背景色彩 - 深色模式 */
+  --modern-background-primary: #000000;
+  --modern-background-secondary: #1C1C1E;
+  --modern-background-tertiary: #2C2C2E;
+  
+  /* 分组背景 - 深色模式 */
+  --modern-background-grouped: #000000;
+  --modern-background-grouped-secondary: #1C1C1E;
+  --modern-background-grouped-tertiary: #2C2C2E;
+  
+  /* 填充色彩 - 深色模式 */
+  --modern-fill-primary: rgba(120, 120, 128, 0.2);
+  --modern-fill-secondary: rgba(120, 120, 128, 0.16);
+  --modern-fill-tertiary: rgba(118, 118, 128, 0.12);
+  --modern-fill-quaternary: rgba(116, 116, 128, 0.08);
+  
+  /* 分隔线 - 深色模式 */
+  --modern-divider: rgba(84, 84, 88, 0.6);
+  --modern-divider-opaque: #38383A;
+}
+
+/* 现代流畅字体类 */
+.modern-typography-large-title {
+  font-size: var(--modern-font-size-large-title);
+  line-height: var(--modern-line-height-large-title);
+  font-weight: 400;
+  letter-spacing: 0.37px;
+}
+
+.modern-typography-title-1 {
+  font-size: var(--modern-font-size-title-1);
+  line-height: var(--modern-line-height-title-1);
+  font-weight: 400;
+  letter-spacing: 0.36px;
+}
+
+.modern-typography-title-2 {
+  font-size: var(--modern-font-size-title-2);
+  line-height: var(--modern-line-height-title-2);
+  font-weight: 400;
+  letter-spacing: 0.35px;
+}
+
+.modern-typography-title-3 {
+  font-size: var(--modern-font-size-title-3);
+  line-height: var(--modern-line-height-title-3);
+  font-weight: 400;
+  letter-spacing: 0.38px;
+}
+
+.modern-typography-headline {
+  font-size: var(--modern-font-size-headline);
+  line-height: var(--modern-line-height-headline);
+  font-weight: 600;
+  letter-spacing: -0.41px;
+}
+
+.modern-typography-body {
+  font-size: var(--modern-font-size-body);
+  line-height: var(--modern-line-height-body);
+  font-weight: 400;
+  letter-spacing: -0.41px;
+}
+
+.modern-typography-callout {
+  font-size: var(--modern-font-size-callout);
+  line-height: var(--modern-line-height-callout);
+  font-weight: 400;
+  letter-spacing: -0.32px;
+}
+
+.modern-typography-subheadline {
+  font-size: var(--modern-font-size-subheadline);
+  line-height: var(--modern-line-height-subheadline);
+  font-weight: 400;
+  letter-spacing: -0.24px;
+}
+
+.modern-typography-footnote {
+  font-size: var(--modern-font-size-footnote);
+  line-height: var(--modern-line-height-footnote);
+  font-weight: 400;
+  letter-spacing: -0.08px;
+}
+
+.modern-typography-caption-1 {
+  font-size: var(--modern-font-size-caption-1);
+  line-height: var(--modern-line-height-caption-1);
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+.modern-typography-caption-2 {
+  font-size: var(--modern-font-size-caption-2);
+  line-height: var(--modern-line-height-caption-2);
+  font-weight: 400;
+  letter-spacing: 0.07px;
+}
+
+/* 全局字体应用 */
+body, 
+html {
+  font-family: var(--app-font-family) !important;
+  font-size: var(--app-font-size) !important;
+  font-weight: var(--app-font-weight) !important;
+}
+
+/* 所有文本元素继承应用字体 */
+* {
+  font-family: inherit;
+}
+
+/* 保持系统字体的元素优先级较高 */
+button,
+input,
+select,
+textarea {
+  font-family: var(--app-font-family) !important;
+}
+
+/* 全局背景应用 - 优化版 */
+body {
+  position: relative;
+  min-height: 100vh;
+  /* 确保body元素覆盖整个视口 */
+  margin: 0;
+  padding: 0;
+}
+
+/* 背景图片层 - 使用更稳定的定位 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: var(--app-background-image);
+  background-size: var(--app-background-size);
+  background-position: var(--app-background-position);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: var(--app-background-opacity, 1);
+  filter: var(--app-background-filter, none);
+  z-index: -1000;
+  pointer-events: none;
+  /* 确保背景图片在所有情况下都显示 */
+  display: block;
+}
+
+/* 隐藏默认背景，只在有自定义背景时显示 */
+body:not([data-has-background="true"])::before {
+  display: none;
+}
+
+/* 应用根容器 */
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  /* 确保内容在背景之上正确显示 */
+}
+
+/* 当有背景图片时，主内容区域添加透明度 - 优化版 */
+body[data-has-background="true"] #app {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* 添加微妙的边框以增强视觉分离 */
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.dark body[data-has-background="true"] #app {
+  background: rgba(0, 0, 0, 0.88);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* 卡片和容器的背景透明度调整 - 增强版 */
+body[data-has-background="true"] .modern-card,
+body[data-has-background="true"] .card,
+body[data-has-background="true"] .el-card,
+body[data-has-background="true"] [class*="card"] {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(60, 60, 67, 0.15) !important;
+  /* 增强卡片的视觉深度 */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark body[data-has-background="true"] .modern-card,
+.dark body[data-has-background="true"] .card,
+.dark body[data-has-background="true"] .el-card,
+.dark body[data-has-background="true"] [class*="card"] {
+  background: rgba(28, 28, 30, 0.85) !important;
+  border: 1px solid rgba(84, 84, 88, 0.4) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 确保所有主要容器都应用背景效果 */
+body[data-has-background="true"] .page-container,
+body[data-has-background="true"] .main-content,
+body[data-has-background="true"] .content-wrapper,
+body[data-has-background="true"] .layout-content {
+  background: transparent;
+}
+
+/* 导航栏和侧边栏的背景调整 */
+body[data-has-background="true"] .el-menu,
+body[data-has-background="true"] .sidebar,
+body[data-has-background="true"] .navbar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(60, 60, 67, 0.15) !important;
+}
+
+.dark body[data-has-background="true"] .el-menu,
+.dark body[data-has-background="true"] .sidebar,
+.dark body[data-has-background="true"] .navbar {
+  background: rgba(28, 28, 30, 0.9) !important;
+  border-color: rgba(84, 84, 88, 0.4) !important;
+}
+
+/* 基础样式重置 */
+.modern-app {
+  background-color: var(--modern-background-primary);
+  color: var(--modern-text-primary);
+  transition: background-color var(--modern-duration-medium) var(--modern-easing-ease),
+              color var(--modern-duration-medium) var(--modern-easing-ease);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 现代触感反馈 */
+.modern-interactive {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* 现代滚动条 */
+.modern-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.modern-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--modern-fill-tertiary);
+  border-radius: var(--modern-radius-full);
+}
+
+.modern-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--modern-fill-secondary);
+}

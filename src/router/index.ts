@@ -46,6 +46,15 @@ export const constantRoutes: RouteRecordRaw[] = [
           icon: 'Brush',
         },
       },
+      {
+        path: 'modern-demo',
+        name: 'ModernDemo',
+        component: () => import('@/views/modern-demo.vue'),
+        meta: {
+          title: '现代设计演示',
+          icon: 'Palette',
+        },
+      },
     ],
   },
 ]
