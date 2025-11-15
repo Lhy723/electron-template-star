@@ -11,10 +11,12 @@ node_modules
 dist
 dist-electron
 dist-ssr
+.qoder/
 *.local
 
 # Editor directories and files
 .vscode/*
+.qoder/*
 !.vscode/extensions.json
 .idea
 .DS_Store

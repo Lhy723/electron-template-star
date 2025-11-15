@@ -191,14 +191,18 @@ const handleLogout = () => {
   display: flex;
   height: 100vh;
   overflow: hidden;
+  background: var(--modern-background-primary);
+  color: var(--modern-text-primary);
 }
 
 /* 侧边栏 */
 .app-sidebar {
   width: 200px;
-  background: var(--el-bg-color);
-  border-right: 1px solid var(--el-border-color);
-  transition: width 0.3s ease;
+  background: var(--modern-background-secondary);
+  border-right: 1px solid var(--modern-divider);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 100;
   overflow: hidden;
 }
 

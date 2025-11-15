@@ -11,6 +11,9 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // Tailwind CSS
 import './assets/styles/index.css'
 
+// 现代流畅设计主题样式
+import './styles/modern-theme.css'
+
 // 主题样式
 import './styles/theme.css'
 
@@ -30,8 +33,11 @@ app.use(ElementPlus)
 
 // 初始化主题
 import { useThemeStore } from './stores/theme'
+import { useModernThemeStore } from './stores/modern-theme'
 const themeStore = useThemeStore()
+const modernThemeStore = useModernThemeStore()
 themeStore.initTheme()
+modernThemeStore.initialize()
 
 // 挂载应用
 app.mount('#app')

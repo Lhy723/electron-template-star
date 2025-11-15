@@ -1,0 +1,482 @@
+/* iOS 风格交互动效和手势动画 */
+
+/* 动效缓动函数 */
+:root {
+  /* iOS 缓动曲线 */
+  --ios-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ios-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ios-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ios-ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+  --ios-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ios-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* 动效持续时间 */
+  --ios-duration-instant: 100ms;
+  --ios-duration-fast: 200ms;
+  --ios-duration-medium: 300ms;
+  --ios-duration-slow: 500ms;
+  --ios-duration-page: 350ms;
+  --ios-duration-modal: 400ms;
+  
+  /* 弹性动画参数 */
+  --ios-spring-damping: 0.8;
+  --ios-spring-velocity: 0.6;
+  --ios-spring-mass: 1;
+  --ios-spring-stiffness: 100;
+}
+
+/* 基础交互动效 */
+.ios-interactive {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--ios-duration-fast) var(--ios-ease-in-out);
+}
+
+/* 点击波纹效果 */
+.ios-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ios-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width var(--ios-duration-medium) var(--ios-ease-out),
+              height var(--ios-duration-medium) var(--ios-ease-out);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ios-ripple:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.dark .ios-ripple::before {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 按钮点击动效 */
+.ios-button-press {
+  transition: all var(--ios-duration-fast) var(--ios-ease-in-out);
+}
+
+.ios-button-press:active {
+  transform: scale(0.96);
+  opacity: 0.8;
+}
+
+/* 卡片悬浮动效 */
+.ios-card-hover {
+  transition: all var(--ios-duration-medium) var(--ios-ease-in-out);
+}
+
+.ios-card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.dark .ios-card-hover:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.ios-card-hover:active {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .ios-card-hover:active {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 列表项动效 */
+.ios-list-item {
+  transition: all var(--ios-duration-fast) var(--ios-ease-in-out);
+  position: relative;
+}
+
+.ios-list-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--modern-divider);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--ios-duration-medium) var(--ios-ease-in-out);
+}
+
+.ios-list-item:hover {
+  background: var(--modern-fill-quaternary);
+  transform: translateX(4px);
+}
+
+.ios-list-item:hover::after {
+  transform: scaleX(1);
+}
+
+.ios-list-item:active {
+  background: var(--modern-fill-tertiary);
+  transform: translateX(2px) scale(0.99);
+}
+
+/* 页面过渡动画 */
+.ios-page-enter-active,
+.ios-page-leave-active {
+  transition: all var(--ios-duration-page) var(--ios-ease-in-out);
+}
+
+.ios-page-enter-from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.ios-page-leave-to {
+  opacity: 0;
+  transform: translateX(-30%);
+}
+
+/* 模态框动画 */
+.ios-modal-enter-active,
+.ios-modal-leave-active {
+  transition: all var(--ios-duration-modal) var(--ios-ease-in-out);
+}
+
+.ios-modal-enter-from {
+  opacity: 0;
+  transform: translateY(100%) scale(0.9);
+}
+
+.ios-modal-leave-to {
+  opacity: 0;
+  transform: translateY(100%) scale(0.9);
+}
+
+.ios-modal-backdrop-enter-active,
+.ios-modal-backdrop-leave-active {
+  transition: opacity var(--ios-duration-modal) var(--ios-ease-in-out);
+}
+
+.ios-modal-backdrop-enter-from,
+.ios-modal-backdrop-leave-to {
+  opacity: 0;
+}
+
+/* 侧边栏滑动动画 */
+.ios-sidebar-enter-active,
+.ios-sidebar-leave-active {
+  transition: all var(--ios-duration-page) var(--ios-ease-in-out);
+}
+
+.ios-sidebar-enter-from {
+  transform: translateX(-100%);
+}
+
+.ios-sidebar-leave-to {
+  transform: translateX(-100%);
+}
+
+/* 标签页切换动画 */
+.ios-tab-slide-enter-active,
+.ios-tab-slide-leave-active {
+  transition: all var(--ios-duration-medium) var(--ios-ease-in-out);
+  position: absolute;
+  width: 100%;
+}
+
+.ios-tab-slide-enter-from {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.ios-tab-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+/* 弹簧动画 */
+.ios-spring {
+  transition: transform var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+.ios-spring:hover {
+  transform: scale(1.05);
+}
+
+.ios-spring:active {
+  transform: scale(0.95);
+}
+
+/* 摇摆动画 */
+@keyframes ios-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  75% { transform: rotate(-1deg); }
+}
+
+.ios-wiggle {
+  animation: ios-wiggle var(--ios-duration-medium) var(--ios-ease-in-out) infinite;
+}
+
+/* 脉冲动画 */
+@keyframes ios-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.ios-pulse {
+  animation: ios-pulse 2s var(--ios-ease-in-out) infinite;
+}
+
+/* 呼吸动画 */
+@keyframes ios-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.ios-breathe {
+  animation: ios-breathe 3s var(--ios-ease-in-out) infinite;
+}
+
+/* 浮动动画 */
+@keyframes ios-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.ios-float {
+  animation: ios-float 3s var(--ios-ease-in-out) infinite;
+}
+
+/* 加载旋转动画 */
+@keyframes ios-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.ios-spin {
+  animation: ios-spin 1s linear infinite;
+}
+
+/* 渐入动画组 */
+.ios-fade-in {
+  animation: ios-fade-in var(--ios-duration-medium) var(--ios-ease-out);
+}
+
+@keyframes ios-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ios-fade-in-up {
+  animation: ios-fade-in-up var(--ios-duration-medium) var(--ios-ease-out);
+}
+
+@keyframes ios-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ios-fade-in-down {
+  animation: ios-fade-in-down var(--ios-duration-medium) var(--ios-ease-out);
+}
+
+@keyframes ios-fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ios-fade-in-left {
+  animation: ios-fade-in-left var(--ios-duration-medium) var(--ios-ease-out);
+}
+
+@keyframes ios-fade-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ios-fade-in-right {
+  animation: ios-fade-in-right var(--ios-duration-medium) var(--ios-ease-out);
+}
+
+@keyframes ios-fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 缩放动画 */
+.ios-scale-in {
+  animation: ios-scale-in var(--ios-duration-medium) var(--ios-ease-spring);
+}
+
+@keyframes ios-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 延迟动画类 */
+.ios-delay-100 { animation-delay: 100ms; }
+.ios-delay-200 { animation-delay: 200ms; }
+.ios-delay-300 { animation-delay: 300ms; }
+.ios-delay-400 { animation-delay: 400ms; }
+.ios-delay-500 { animation-delay: 500ms; }
+
+/* 手势识别相关样式 */
+.ios-swipeable {
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.ios-swipe-indicator {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity var(--ios-duration-fast) var(--ios-ease-in-out);
+  color: var(--modern-text-tertiary);
+}
+
+.ios-swipeable:hover .ios-swipe-indicator {
+  opacity: 1;
+}
+
+/* 状态指示器动画 */
+.ios-loading-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.ios-loading-dots::before,
+.ios-loading-dots::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: ios-loading-dots 1.5s var(--ios-ease-in-out) infinite;
+}
+
+.ios-loading-dots::before {
+  animation-delay: 0ms;
+}
+
+.ios-loading-dots::after {
+  animation-delay: 300ms;
+}
+
+@keyframes ios-loading-dots {
+  0%, 80%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 响应式动画优化 */
+@media (max-width: 768px) {
+  .ios-card-hover:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  .ios-button-press:active {
+    transform: scale(0.98);
+  }
+}
+
+/* 性能优化 */
+.ios-interactive,
+.ios-card-hover,
+.ios-list-item,
+.ios-spring {
+  will-change: transform, opacity, box-shadow;
+}
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+  .ios-interactive,
+  .ios-card-hover,
+  .ios-list-item,
+  .ios-spring,
+  .ios-button-press {
+    transition: none;
+    animation: none;
+  }
+  
+  .ios-interactive:hover,
+  .ios-card-hover:hover,
+  .ios-list-item:hover,
+  .ios-spring:hover {
+    transform: none;
+  }
+  
+  .ios-wiggle,
+  .ios-pulse,
+  .ios-breathe,
+  .ios-float,
+  .ios-spin {
+    animation: none;
+  }
+}
+
+/* 高对比度模式适配 */
+@media (prefers-contrast: high) {
+  .ios-ripple::before {
+    background: var(--modern-text-primary);
+    opacity: 0.1;
+  }
+  
+  .ios-list-item:hover {
+    background: var(--modern-text-primary);
+    color: var(--modern-background-primary);
+  }
+}

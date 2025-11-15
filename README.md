@@ -176,11 +176,3 @@ electron-template-star/
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
-
-## 📄 许可证
-
-MIT License
-
-## 🙏 致谢
-
-感谢所有开源项目的贡献者们！
